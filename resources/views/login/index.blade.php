@@ -19,15 +19,14 @@
 "/>
   </div>
  
-  <form class="login-form">
+  <div class="login-form">
     <input type="text" placeholder="Usuario" id="username"/>
     <input type="password" placeholder="Clave" id="password"/>
-    <button>Acceder</button> 
-  </form>
+    <button id="acceder">Acceder</button> 
+</div>
 </div> 
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-    <script src="js/index.js"></script>
+  <script src="{{asset('js/login.js')}}"></script>
 
 </body>
 </html>

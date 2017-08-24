@@ -11,8 +11,9 @@
     <li>Si todo fue exitoso insertamos el siguiente comando </li>
     <li>php -r "file_exists('.env') || copy('.env.example', '.env');"</li>
     <li>Seteamos en el archivo .env las credenciales de Base de datos, donde la base de datos es "jamon"</li>
-    <li>Una vez creada la base de datos nos vamos a la consola y insertamos la siguiente instruccion</li>
+    <li>Una vez creada la base de datos nos vamos a la consola y insertamos la siguiente instrucciones:</li>
     <li>php artisan migrate:refresh --seed</li>
+    <li>npm install</li>
 </ul>
 <p>Una vez terminado el proceso, tendremos el proyecto listo, donde las credenciales son;</p>
 <ul>

@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login/index');
+Route::get('/test', function () {
+    return view('backend/index');
 });
