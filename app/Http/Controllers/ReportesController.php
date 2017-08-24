@@ -11,7 +11,7 @@ class ReportesController extends Controller
         // $this->middleware('auth');
         $this->variables = [
              'titulo' => 'Inicio',
-             'favicon' => 'fav.ico', 
+             'favicon' => asset('img/log.png'), 
              'ReportClass' => 'class="active-menu"' 
          ];
     }

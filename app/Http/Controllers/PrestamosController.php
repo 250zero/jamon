@@ -11,7 +11,7 @@ class PrestamosController extends Controller
         // $this->middleware('auth');
         $this->variables = [
              'titulo' => 'Inicio',
-             'favicon' => 'fav.ico', 
+             'favicon' => asset('img/log.png'), 
              'ScheduleClass' => 'class="active-menu"' 
          ];
     }
