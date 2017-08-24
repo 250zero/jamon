@@ -17,5 +17,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link href="{{asset('css/font-awesome.css')}}" rel="stylesheet" />
     <link href="{{asset('css/toastr.min.css')}}" rel="stylesheet" />
+    <script>
+         var BASE_URL = '{{url('/')}}/';
+    </script>
 </head>
 <body>

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Cliente extends Model
 {
-    protected $table="user"; 
+    protected $table="clientes"; 
     protected $primaryKey="id_user";
     protected $hidden = [
         'password' 

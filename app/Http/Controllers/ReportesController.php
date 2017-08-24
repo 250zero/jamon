@@ -13,7 +13,7 @@ class ReportesController extends Controller
              'titulo' => 'Inicio',
              'favicon' => asset('img/log.png'), 
              'ReportClass' => 'class="active-menu"' 
-         ];
+        ];
     }
 
     public function index()

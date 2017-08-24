@@ -18,5 +18,13 @@ Route::get('/test', function () {
 
 
 Route::get('/clientes', 'ClientesController@index');
+Route::get('/clientes/all', 'ClientesController@all');
+
+
+
 Route::get('/agenda', 'AgendaController@index');
+
+
+
+
 Route::get('/reportes', 'ReportesController@index');

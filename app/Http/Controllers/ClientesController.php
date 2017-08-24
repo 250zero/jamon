@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Clientes;
 use Illuminate\Http\Request;
 
 class ClientesController extends Controller
 {
     private $variables;
+    private $limit = 10;
      
     function __construct(){
         // $this->middleware('auth');
@@ -49,9 +50,16 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function all(Request $request)
     {
-        //
+        return Clientes::where('estado',1)
+                       ->where('nombre','like','%'.$request->search.'%')
+                       ->paginate($this->limit);
+    }
+
+    public function show(Request $request)
+    {
+        return Clientes::where('id_clientes',$request->id)->paginate($this->limit);
     }
 
     /**
