@@ -6,14 +6,20 @@ use Illuminate\Http\Request;
 
 class ClientesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $variables;
+     
+    function __construct(){
+        // $this->middleware('auth');
+        $this->variables = [
+             'titulo' => 'Inicio',
+             'favicon' => 'fav.ico', 
+             'clientclass' => 'class="active-menu"' 
+         ];
+    }
+
     public function index()
     {
-        //
+        return view('backend/client/index',$this->variables);
     }
 
     /**

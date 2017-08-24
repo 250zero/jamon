@@ -6,15 +6,21 @@ use Illuminate\Http\Request;
 
 class PrestamosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $variable;
+    function __construct(){
+        // $this->middleware('auth');
+        $this->variables = [
+             'titulo' => 'Inicio',
+             'favicon' => 'fav.ico', 
+             'ScheduleClass' => 'class="active-menu"' 
+         ];
+    }
+
     public function index()
     {
-        //
+        return view('backend/loans/index',$this->variables);
     }
+
 
     /**
      * Show the form for creating a new resource.

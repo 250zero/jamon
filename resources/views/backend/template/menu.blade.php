@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">COMPANY NAME</a>
+                <a class="navbar-brand"  id="user_label">Admin </a>
             </div>
 
             <div class="header-right">
@@ -24,23 +24,30 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <div class="user-img-div">
-                            <img src="assets/img/user.png" class="img-thumbnail" />
-
-                            <div class="inner-text">
-                                Jhon Deo Alex
-                            <br />
-                                <small>Last Login : 2 Weeks Ago </small>
-                            </div>
+                        <div  >
+                            <img src="{{asset('img/log.png')}}" style="
+    width: 200px;
+    height: 250px;
+    padding: 0px;
+    margin-top: -40px;
+    margin-left: 3px;
+    margin-bottom: -70px;
+"  />
+ 
                         </div>
 
                     </li>
 
 
                     <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard "></i>Dashboard</a>
+                    <a  <?=(!empty($ScheduleClass))?$ScheduleClass:''?>  href="{{url('/')}}/agenda"><i class="fa fa-calendar "></i>Agenda</a>
                     </li>
                     <li>
+                        <a   <?=(!empty($clientclass))?$clientclass:''?>  href="{{url('/')}}/clientes"><i class="fa fa-user "></i>Clientes</a>
+                    </li><li>
+                        <a  <?=(!empty($ReportClass))?$ReportClass:''?>  href="{{url('/')}}/reportes"><i class="fa fa-bar-chart-o "></i>Reportes</a>
+                    </li>
+                    <!-- <li>
                         <a href="#"><i class="fa fa-desktop "></i>UI Elements <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
@@ -148,7 +155,7 @@
                    
                     <li>
                         <a href="blank.html"><i class="fa fa-square-o "></i>Blank Page</a>
-                    </li>
+                    </li> -->
                 </ul>
 
             </div>

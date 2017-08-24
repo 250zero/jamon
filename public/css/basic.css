@@ -90,8 +90,8 @@ body {
 }
 
 .user-img-div {
-    min-height: 140px;
-    padding: 20px;
+    /* min-height: 140px; */
+    padding: 10px;
     background-color: #b35f0d;
 }
 

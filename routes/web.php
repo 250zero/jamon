@@ -14,3 +14,9 @@
 Route::get('/test', function () {
     return view('backend/index');
 });
+
+
+
+Route::get('/clientes', 'ClientesController@index');
+Route::get('/agenda', 'AgendaController@index');
+Route::get('/reportes', 'ReportesController@index');

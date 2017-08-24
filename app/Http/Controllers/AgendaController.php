@@ -6,14 +6,20 @@ use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $variable;
+     
+    function __construct(){
+        // $this->middleware('auth');
+        $this->variables = [
+             'titulo' => 'Inicio',
+             'favicon' => 'fav.ico', 
+             'ScheduleClass' => 'class="active-menu"' 
+         ];
+    }
+
     public function index()
     {
-        //
+        return view('backend/schedule/index',$this->variables);
     }
 
     /**
