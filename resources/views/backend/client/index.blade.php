@@ -58,6 +58,7 @@
 </div>
 <!-- /. PAGE WRAPPER  -->
  
- @include('backend.template.footer')
+@include('backend.template.footer')
  <script src="{{asset('js/cliente/index.js')}}"></script>
-    
+
+ @include('backend.modals.cliente.index')

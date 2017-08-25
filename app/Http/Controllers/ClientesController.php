@@ -59,7 +59,7 @@ class ClientesController extends Controller
 
     public function show(Request $request)
     {
-        return Cliente::where('id_clientes',$request->id)->first();
+        return Cliente::where('id_cliente',$request->id)->first();
     }
 
     /**

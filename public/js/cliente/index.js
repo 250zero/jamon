@@ -18,7 +18,7 @@ function buscar(){
     }).done(function(result){
         var html=''; 
          $(result.data).each(function(){  
-            html += '<tr >'; 
+            html += '<tr onclick="verCliente('+this.id_cliente+')" >'; 
             html += '<td>';
             html +=  this.nombre + ' ' + this.apellido;
             html += '</td>';
@@ -62,3 +62,42 @@ $('#search').on('keypress',function(e){
          buscar();   
     }    
 });
+
+
+$('#btn_nuevo').on('click',function(){
+    $('#ClientModal').modal('show');
+    $('#client_name').val('');
+    $('#client_last_name').val('');
+    $('#email').val('');
+    $('#telephone').val('');
+    $('#cellphone').val('');
+    $('.modal-title').html('Nuevo Cliente');
+    $('#add_loans').css('display','none');
+    $('#id_client').val('0');
+});
+
+$('#save_client').on('click',function(){
+    if($('#id_client').val() > 0){
+
+    }
+});
+
+function verCliente(id)
+{
+    $.ajax({
+        url: BASE_URL + 'clientes/show' ,
+        method: 'get' ,
+        dataType:'json',
+        data:{id:id}
+    }).done(function(result){
+        $('#client_name').val(result.nombre);
+        $('#client_last_name').val(result.apellido);
+        $('#email').val(result.email);
+        $('#telephone').val(result.telefono);
+        $('#cellphone').val(result.celular);
+        $('.modal-title').html(result.nombre+' '+result.apellido);
+        $('#add_loans').css('display','inline-block');
+        $('#id_client').val(result.id_cliente);
+        $('#ClientModal').modal('show');
+    });
+}
