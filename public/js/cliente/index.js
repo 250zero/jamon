@@ -77,8 +77,34 @@ $('#btn_nuevo').on('click',function(){
 });
 
 $('#save_client').on('click',function(){
+    data ={
+        nombre : $('#client_name').val(),
+        apellido : $('#client_last_name').val(),
+        email : $('#email').val(),
+        tell : $('#telephone').val(),
+        cell : $('#cellphone').val(),
+        id : $('#id_client').val(), 
+        _token:$('input[name=_token]').val()
+    };
     if($('#id_client').val() > 0){
+        $.ajax({
+            url: BASE_URL + 'clientes' ,
+            method: 'PUT' ,
+            dataType:'json',
+            data:data
+        }).done(function(result){
 
+        });
+    }
+    if($('#id_client').val() == 0){
+        $.ajax({
+            url: BASE_URL + 'clientes' ,
+            method: 'POST' ,
+            dataType:'json',
+            data:data
+        }).done(function(result){
+
+        });
     }
 });
 
