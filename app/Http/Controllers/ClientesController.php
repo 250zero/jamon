@@ -28,9 +28,28 @@ class ClientesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if(!$request->has('id'))
+        {
+           return ['msn'=>'Id no presente','status'=>0];
+        }
+        if($request->id !=0 )
+        {
+           return ['msn'=>'Formulario no valido','status'=>0];
+        }
+        $insert = new Cliente();
+        $insert->nombre =  $request->nombre;
+        $insert->apellido = $request->apellido;
+        $insert->email = $request->email;
+        $insert->telefono =  $request->tell;
+        $insert->celular = $request->cell ;
+        $insert->estado = 1 ;
+        $insert->save();
+        if($insert->id_cliente > 0){
+            return ['msn'=>'Cliente creado exitosamente.','status'=>1];
+        }
+        return ['msn'=>'Favor comunicarse con el administrador','status'=>0];
     }
 
     /**
@@ -41,7 +60,26 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!$request->has('id'))
+        {
+           return ['msn'=>'Id no presente','status'=>0];
+        }
+        if($request->id <= 0 || !is_numeric($request->id) )
+        {
+           return ['msn'=>'Id formulario no valido','status'=>0];
+        }
+
+        $update = Cliente::find($request->id);
+        $update->nombre =  $request->nombre;
+        $update->apellido = $request->apellido;
+        $update->email = $request->email;
+        $update->telefono =  $request->tell;
+        $update->celular = $request->cell ; 
+        $update->save();
+        if($update->id_cliente > 0){
+            return ['msn'=>'Cliente actualizado exitosamente.','status'=>1];
+        }
+        return ['msn'=>'Favor comunicarse con el administrador','status'=>0];
     }
 
     /**

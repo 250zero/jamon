@@ -2,7 +2,7 @@ var pagina = 1;
 var ultima_pagina = 1;
 
 $(document).ready(function(){
-    buscar();
+    buscar(); 
 });
 
 
@@ -76,7 +76,7 @@ $('#btn_nuevo').on('click',function(){
     $('#id_client').val('0');
 });
 
-$('#save_client').on('click',function(){
+$('#save_client').click(function(){
     data ={
         nombre : $('#client_name').val(),
         apellido : $('#client_last_name').val(),
@@ -93,6 +93,16 @@ $('#save_client').on('click',function(){
             dataType:'json',
             data:data
         }).done(function(result){
+            if(result.status > 0)
+            {
+                pagina = 1;
+                buscar();   
+                $('#ClientModal').modal('hide');
+                toastr.success(result.msn, 'Operación exitosa'); 
+                return true;
+            }
+            toastr.warning(result.msn, 'Advertencia'); 
+            return false;
 
         });
     }
@@ -103,10 +113,21 @@ $('#save_client').on('click',function(){
             dataType:'json',
             data:data
         }).done(function(result){
-
+            if(result.status > 0)
+                {
+                    pagina = 1;
+                    buscar();   
+                    $('#ClientModal').modal('hide');
+                    toastr.success(result.msn, 'Operación exitosa'); 
+                    return true;
+                }
+                toastr.warning(result.msn, 'Advertencia'); 
+                return false;
+    
         });
     }
 });
+ 
 
 function verCliente(id)
 {

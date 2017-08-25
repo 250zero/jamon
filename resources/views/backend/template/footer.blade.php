@@ -16,7 +16,7 @@
        <!-- CUSTOM SCRIPTS -->
     <script src="{{asset('js/custom.js')}}"></script>
       <!-- Notifications  -->
-    <script src="{{asset('js/toastr.min.js')}}"></script> 
+    <script src="../node_modules/toastr/build/toastr.min.js"></script>
     
 
 
