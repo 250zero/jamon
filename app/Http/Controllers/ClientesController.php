@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Clientes;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClientesController extends Controller
@@ -52,14 +52,14 @@ class ClientesController extends Controller
      */
     public function all(Request $request)
     {
-        return Clientes::where('estado',1)
+        return Cliente::where('estado',1)
                        ->where('nombre','like','%'.$request->search.'%')
                        ->paginate($this->limit);
     }
 
     public function show(Request $request)
     {
-        return Clientes::where('id_clientes',$request->id)->paginate($this->limit);
+        return Cliente::where('id_clientes',$request->id)->first();
     }
 
     /**

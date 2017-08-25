@@ -22,7 +22,7 @@
                     <hr />        
                 <div class="row">
                     <div class="col-sm-12">
-                <table class="table table-striped table-bordered table-hover" > 
+                <table id="tabla_clientes" class="table table-striped table-bordered table-hover" > 
                     <thead>
                         <tr> 
                                 <th>Cliente</th>
@@ -51,3 +51,5 @@
 <!-- /. PAGE WRAPPER  -->
  
  @include('backend.template.footer')
+ <script src="{{asset('js/cliente/index.js')}}"></script>
+    

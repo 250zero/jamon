@@ -1,5 +1,5 @@
-$().ready(function(){
-
+$(document).ready(function(){
+    search();
 });
 
 
@@ -11,15 +11,22 @@ function search(){
         data:{search:$('#search').val()} 
     }).done(function(result){
         var html=''; 
-         $(result).each(function(){  
-            html += '<tr class="info">'; 
-            html += '<td  >';
-            html += '<button class="btn btn-success"  onclick=" return editarModulo('+this.codigo+')"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></button>';
+         $(result.data).each(function(){  
+            html += '<tr >'; 
+            html += '<td>';
+            html +=  this.nombre + ' ' + this.apellido;
             html += '</td>';
-            html += '<td colspan="3" >';
-            html += this.codigo+' - '+this.nombre;
+            html += '<td>';
+            html +=  this.email;
             html += '</td>';
+            html += '<td>';
+            html +=  this.telefono;
+            html += '</td>';
+            html += '<td>';
+            html +=  this.celular;
+            html += '</td>'; 
             html += '<tr>'; 
-             $('#modulo_permises tbody').html(html);
+        });
+             $('#tabla_clientes tbody').html(html);
     });
 }
