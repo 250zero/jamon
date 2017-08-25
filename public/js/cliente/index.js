@@ -1,6 +1,11 @@
 var pagina = 1;
 var ultima_pagina = 1;
 
+
+var pagina_prest = 1;
+var ultima_pagina_prest = 1;
+
+
 $(document).ready(function(){
     buscar(); 
 });
@@ -146,5 +151,6 @@ function verCliente(id)
         $('#add_loans').css('display','inline-block');
         $('#id_client').val(result.id_cliente);
         $('#ClientModal').modal('show');
+        verPrestamos();
     });
 }

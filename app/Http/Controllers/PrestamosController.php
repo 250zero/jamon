@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Prestamos;
 
 class PrestamosController extends Controller
 {
@@ -27,9 +28,38 @@ class PrestamosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $r)
     {
-        //
+        if(!$r->has('id_cliente')){
+            return ['msn'=>'No se pudo encontrar el cliente','status'=>0];
+        }
+        if($r->id_cliente <= 0){
+            return ['msn'=>'No se pudo encontrar el cliente','status'=>0];
+        }
+        $create = new Prestamos();
+        $create->porciento = $r->porciento;
+        $create->id_cliente = $r->id_cliente;
+        $create->capital_solicitado = $r->capital_solicitado;
+        $create->capital_pagado = 0;
+        $create->capital_restante = $r->capital_solicitado;
+        $create->interes_pagado = 0;
+        $create->interes_total = $r->total_pagar_interes;
+        $create->interes_restante = 0;
+        $create->interes_mora = $r->interes_mora;
+        $create->total_cuotas = $r->cuota_pagar;
+        $create->dias_pagos = $r->dias_pagos;
+        $create->interes_mora_pagado = 0;
+        $create->interes_mora_monto = $r->monto_mora;
+        $create->dias_mora = $r->dias_mora; 
+        $create->numero_cuotas = $r->numero_cuotas;
+        $create->dias_restantes = $r->numero_cuotas;
+        $create->estado = 1; 
+        $create->save();
+        if( $create->id_prestamo > 0){
+            return ['msn'=>'Prestamo registrado con exito','status'=>1];
+        } 
+        return ['msn'=>'Favor comunicarse con el administrador','status'=>0];
+
     }
 
     /**
@@ -49,9 +79,9 @@ class PrestamosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        return Prestamos::where('id_prestamo',$request->id)->first();
     }
 
     /**
@@ -60,9 +90,9 @@ class PrestamosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function client(Request $request)
     {
-        //
+        return Prestamos::where('id_cliente',$request->id)->paginate(5);
     }
 
     /**

@@ -1,5 +1,5 @@
-<div class="modal fade" tabindex="-100" role="dialog" id="LoansModalDetail">
-  <div class="modal-dialog" role="document"  style="width:70%" >
+<div class="modal fade" tabindex="-200" role="dialog" id="LoansModalDetailTransac">
+  <div class="modal-dialog" role="document"  style="width:85%" >
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -8,101 +8,92 @@
       <div class="modal-body"> 
                     <div class="row">
                             <div class="col-sm-12"> 
-                                <div class="col-sm-4"> 
+                                <div class="col-sm-5"> 
                                     <div class="form-group">
-                                        <label>Capital a Solicitar</label>
-                                        <input type="number" id="capital_solicitado" class="form-control"> 
-                                        <label></label>
+                                        <h3>Detalle</h3>
+                                        <table  class="table table-striped table-bordered table-hover" >
+                                           <tbody>
+                                           <tr>
+                                               <td><b>Capital Solicitado</b></td>
+                                               <td id="capital_solicitado_detail"></td>
+                                            </tr> 
+                                            <tr>
+                                                <td><b>Capital Pagado</b></td>
+                                                <td id="capital_pagado_detail"></td>
+                                             </tr> 
+                                           <tr>
+                                               <td><b>Capital por Pagar</b></td>
+                                               <td id="capital_restante_detail"></td>
+                                            </tr> 
+                                            <tr>
+                                                <td><b>% Interes</b></td>
+                                                <td id="porciento_detail"></td>
+                                             </tr> 
+                                           <tr>
+                                               <td><b>Interes a pagar</b></td>
+                                               <td id="interes_total_detail"></td>
+                                            </tr> 
+                                            <tr>
+                                                <td><b>Porciento de Interes por Mora</b></td>
+                                                <td id="interes_mora_detail"></td>
+                                             </tr> 
+                                           <tr>
+                                               <td><b>Monto de Interes por Mora</b></td>
+                                               <td id="interes_mora_monto_detail"></td>
+                                            </tr> 
+                                             <tr>
+                                               <td><b>Monto de Interes Pagado por Mora</b></td>
+                                               <td id="interes_mora_pagado_detail"></td>
+                                            </tr> 
+                                            <tr>
+                                                <td><b>Monto de Cuotas</b></td>
+                                                <td id="total_cuotas_detail"></td>
+                                             </tr> 
+                                             <tr>
+                                                 <td><b>Dias de Pago</b></td>
+                                                 <td id="dias_pagos_detail"></td>
+                                              </tr> 
+                                              <tr>
+                                                  <td><b>Numero de Cuotas</b></td>
+                                                  <td id="numero_cuotas_detail"></td>
+                                               </tr> 
+                                               <tr>
+                                                   <td><b>Numero de Cuotas Restantes</b></td>
+                                                   <td id="dias_restantes_detail"></td>
+                                                </tr> 
+                                                <tr>
+                                                    <td><button class="btn btn-warning" >Realizar Transacción</button> </td>
+                                                    <td> </td>
+                                                    </tr>  
+                                           </tbody>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="col-sm-4"> 
+                                <div class="col-sm-7"> 
                                     <div class="form-group">
-                                        <label>% Interes</label>
-                                        <input type="number" id="interes" class="form-control">
-                                        <label></label>
-                                    </div>
-                                </div> 
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Total a pagar</label>
-                                        <input type="number" readonly="true" id="total_pagar" class="form-control">
-                                    </div>
-                                </div> 
-                            </div>
-                    </div> 
-                   <div class="row">
-                            <div class="col-sm-12"> 
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Fecha Inicio</label>
-                                        <input type="date" id="fecha_ini" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Fecha Fin</label>
-                                        <input type="date" id="fecha_fin" class="form-control">
-                                    </div>
-                                </div> 
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Numero Cuotas</label>
-                                        <input type="number" id="numero_cuota" class="form-control">
+                                        <h3>Movimientos</h3>
+                                        <table id="header_transact" class="table table-striped table-bordered table-hover" >
+                                            <thead>
+                                                    <tr>
+                                                    <th>Fecha</th> 
+                                                    <th>Comentario</th> 
+                                                    <th>Monto</th>  
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                            </table>
+                                            <nav aria-label="Page navigation ">
+                                                    <ul class="pager">
+                                                        <li class="previous  " id="loans_trans_prev" ><a href="#">← Anterior</a></li> 
+                                                        <li id="info_pag_loans_trans"> </li> 
+                                                        <li class="next" id="loans_trans_next" ><a href="#">Siguiente →</a></li>
+                                                    </ul> 
+                                                    <div class="col-sm-6"><span></span></div>
+                                                </nav> 
                                     </div>
                                 </div> 
                             </div>
-                    </div>   
-                    <div class="row">
-                            <div class="col-sm-12"> 
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Dia de Pago</label>
-                                        <input type="number" id="dia_pago" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Cuota a pagar</label>
-                                        <input type="number" readonly="true" id="cuota_pagar" class="form-control">
-                                    </div>
-                                </div> 
-                                
-                                <div class="col-sm-4"> 
-                                    <div class="form-group"><br> 
-                                         <button class="btn btn-primary">Tabla Amortización</label>
-                                    </div> 
-                                </div> 
-                            </div>
-                    </div>   
-                    <div class="row">
-                            <div class="col-sm-12"> 
-                                    <div class="col-sm-6"> 
-                                        <h3>Mora por dias atrasados</h3><br>
-                                    </div>
-                            </div>
-                            <div class="col-sm-12"> 
-                               
-                                <div class="col-sm-4"> 
-                                    
-                                    <div class="form-group">
-                                        <label>% interes</label>
-                                        <input type="number" id="interes_mora" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Monto</label>
-                                        <input type="number" id="monto_mora" class="form-control">
-                                    </div>
-                                </div> 
-                                <div class="col-sm-4"> 
-                                    <div class="form-group">
-                                        <label>Rango de dias</label>
-                                        <input type="number" id="rango_dia_mora" class="form-control">
-                                    </div>
-                                </div> 
-                            </div>
-                    </div>      
+                    </div>  
  
                                           
       </div>

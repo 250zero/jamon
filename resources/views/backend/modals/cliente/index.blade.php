@@ -44,16 +44,24 @@
                     <table id="header_loans" class="table table-striped table-bordered table-hover" >
                     <thead>
                             <tr>
-                            <th>Fecha Inicio</th>
-                            <th>Fecha Final</th>  
+                            <th>Numero Cuotas</th> 
+                            <th>Dia de pago</th> 
                             <th>Porciento</th>
                             <th>Cuotas</th>
                             <th>Capital Solicitado</th> 
-                            <th>Capital Amortizado</th> 
+                            <th>Total a Pagar</th> 
                         </tr>
                     </thead>
                     <tbody></tbody>
                     </table>
+                    <nav aria-label="Page navigation ">
+                            <ul class="pager">
+                                <li class="previous  " id="loans_prev" ><a href="#">← Anterior</a></li> 
+                                <li id="info_pag_loans"> </li> 
+                                <li class="next" id="loans_next" ><a href="#">Siguiente →</a></li>
+                            </ul> 
+                            <div class="col-sm-6"><span></span></div>
+                        </nav>  
                 </div>
                 </div>
                 <br>
