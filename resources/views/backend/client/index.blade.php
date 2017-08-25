@@ -34,7 +34,15 @@
                     <tbody>
                        
                     </tbody>
-                </table>       
+                </table> 
+                <nav aria-label="Page navigation ">
+                            <ul class="pager">
+                                <li class="previous  " id="client_prev" ><a href="#">← Anterior</a></li> 
+                                <li id="info_pag"> </li> 
+                                <li class="next" id="client_next" ><a href="#">Siguiente →</a></li>
+                            </ul> 
+                            <div class="col-sm-6"><span></span></div>
+                        </nav>      
             </div>
             <style>
             td:hover { 
