@@ -26,8 +26,8 @@ Route::get('/agenda', 'AgendaController@index');
 
 Route::post('/prestamos','PrestamosController@create');
 Route::get('/prestamos/clientes','PrestamosController@client');
-Route::get('/prestamos/detail','PrestamosController@show');
-
-
+Route::get('/prestamos/detail','PrestamosController@show'); 
+Route::get('/prestamos/transacction/all','PrestamosController@transacctionShow');
+Route::post('/prestamos/transacction','PrestamosController@transacction');
 
 Route::get('/reportes', 'ReportesController@index');

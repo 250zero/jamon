@@ -15,7 +15,6 @@ class CreateTransaccionesTable extends Migration
     {
         Schema::create('transacciones', function (Blueprint $table) {
             $table->increments('id_transacciones');
-            $table->integer('id_cliente');
             $table->integer('id_producto');
             $table->float('monto');
             $table->string('comentario');

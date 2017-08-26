@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prestamos;
+use App\Models\Transaccion;
 
 class PrestamosController extends Controller
 {
@@ -105,6 +106,51 @@ class PrestamosController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+    public function transacction(Request $r)
+    {
+        if(!$r->has('id_prestamo')){
+            return ['Esta transaccion no puede ser ejcutada','status'=>0];
+        }
+        $prestamo = Prestamos::find($r->id_prestamo);
+        $tr= new Transaccion();  
+ 
+        if($r->tipo_transacction == 1){
+            $prestamo->dias_restantes = $prestamo->total_cuotas - $r->cuotas_a_pagar ;
+            $prestamo->dias_pagos = $prestamo->dias_pagos + $r->cuotas_a_pagar ; 
+
+            $prestamo->interes_pagado = (( $prestamo->interes_total / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar) + $prestamo->interes_pagado  ;
+            $prestamo->interes_restante =  $prestamo->interes_total - $prestamo->interes_pagado;
+            
+            $prestamo->capital_restante = $prestamo->capital_solicitado - $prestamo->capital_pagado ;
+            $prestamo->capital_pagado = (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar) + $prestamo->capital_pagado  ;
+             
+            $tr->id_producto = $r->id_prestamo;
+            $tr->monto =  (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar);
+            $tr->comentario = $r->comentario_transaccion;
+
+
+            $prestamo->save();
+            $tr->save();
+            return ['msn'=>'Transaccion realizada con exito','status'=>1]; 
+        }
+        if($r->tipo_transacction == 2){ 
+ 
+            $prestamo->interes_mora_pagado = ($prestamo->interes_mora_monto * (  $r->dia_mora_pagar / $prestamo->dias_mora))  +  $prestamo->interes_mora_pagado  ;
+             $tr->id_producto = $r->id_prestamo;
+            $tr->monto =  (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar);
+            $tr->comentario = $r->comentario_transaccion;
+
+            $prestamo->save();
+            $tr->save();
+            return ['msn'=>'Transaccion realizada con exito','status'=>1]; 
+        }
+
+        
+    }
+
+    public function transacctionShow(Request $r){
+        return Transaccion::where('id_producto',$r->id)->paginate(10);
     }
 
     /**

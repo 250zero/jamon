@@ -150,9 +150,9 @@ $('#save_loans').on('click',function(){
     };  
         $.ajax({
             url: BASE_URL + 'prestamos' ,
-            method: 'POST' ,
+            method: 'post' ,
             dataType:'json',
-            data:data
+            data:data,            
         }).done(function(result){
                 if(result.status > 0)
                 { 
@@ -256,7 +256,8 @@ function verPrestamosDetails(id){
         dataType:'json',
         data:{id:id}
     }).done(function(result){
-        $('#capital_solicitado_detail').html(result.capital_solicitado);
+        $('#capital_solicitado_detail').html(result.capital_solicitado); 
+        $('.modal5-title').html('Detalle de prestamo'); 
         $('#capital_pagado_detail').html(result.capital_pagado);
         $('#capital_restante_detail').html(result.capital_restante);
         $('#interes_total_detail').html(result.interes_total);
@@ -268,7 +269,90 @@ function verPrestamosDetails(id){
         $('#dias_pagos_detail').html(result.dias_pagos);
         $('#numero_cuotas_detail').html(result.numero_cuotas);
         $('#dias_restantes_detail').html(result.dias_restantes);   
+        $('#id_prestamo').val(result.id_prestamo);  
         $('#LoansModalDetailTransac').modal('show');
+        verTransacction();
     });
+} 
+
+$('#transaccion_detail').on('click',function(){
+    $('#transactionModal').modal('show');
+    $('#tipo_transaccion').val(1);
+    $('#cuotas_a_pagar').val(0);
+    $('#comentario_transaccion').val('');
+    $('#dia_mora_pagar').val(0);
+   
+});
+
+
+$('#tipo_transaccion').on('change',function(){
+    if($('#tipo_transaccion').val() == 1)
+    {
+        $('.pago_cuota').css('display','block');
+        $('.pago_mora').css('display','none');
+
+    }
+    if($('#tipo_transaccion').val() == 2)
+    {
+        $('.pago_cuota').css('display','none');
+        $('.pago_mora').css('display','block');
+    }
+});
+
+
+$('#save_transacction').on('click',function(){
+     var data={
+         tipo_transacction:$('#tipo_transaccion').val(),
+         cuotas_a_pagar:$('#cuotas_a_pagar').val(),
+         comentario_transaccion:$('#comentario_transaccion').val(),
+         dia_mora_pagar:$('#dia_mora_pagar').val(),
+         id_prestamo:$('#id_prestamo').val(),
+         _token:$('input[name=_token]').val() 
+     }
+        $.ajax({
+            url: BASE_URL + 'prestamos/transacction' ,
+            method: 'POST' ,
+            dataType:'json',
+            data:data
+        }).done(function(result){
+                if(result.status > 0)
+                { 
+                    $('#transactionModal').modal('hide');
+                    toastr.success(result.msn, 'Operación exitosa'); 
+                    verTransacction();
+                    verPrestamos( )
+                    verPrestamosDetails($('#id_prestamo').val());
+                    return true;
+                }
+                toastr.warning(result.msn, 'Advertencia'); 
+                return false; 
+        });  
+});
+  
+
+function verTransacction(){
+    $.ajax({
+        url: BASE_URL + 'prestamos/transacction/all' ,
+        method: 'get' ,
+        dataType:'json',
+        data:{id:$('#id_prestamo').val()}
+    }).done(function(result){
+        var html=''; 
+        $(result.data).each(function(){  
+           html += '<tr   >'; 
+           html += '<td>';
+           html +=  this.created_at;
+           html += '</td>';
+           html += '<td>';
+           html +=  this.comentario;
+           html += '</td>';
+           html += '<td>';
+           html +=  this.monto;
+           html += '</td>';   
+           html += '<tr>'; 
+       });
+       $('#header_transact tbody').html(html);
+       ultima_pagina_prest = result.last_page;
+       $('#info_pag_loans_trans').html('Mostrando pagina '+result.current_page+' de '+result.last_page+', de '+result.total+' registros');
+    });  
 }
-$('#LoansModalDetailTransac').modal('show');
