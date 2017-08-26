@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/test', function () {
-    return view('backend/index');
-});
+Route::get('/',  'LoginController@index')->name('login');
+Route::get('/login',  'LoginController@index');
+Route::get('/logout',  'LoginController@logout')->name('logout');
+Route::post('/acceder',  'LoginController@login')->name('acceder');
 
 
 

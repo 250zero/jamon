@@ -10,7 +10,7 @@ class PrestamosController extends Controller
 {
     private $variable;
     function __construct(){
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->variables = [
              'titulo' => 'Inicio',
              'favicon' => asset('img/log.png'), 
