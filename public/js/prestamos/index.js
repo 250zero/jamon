@@ -46,9 +46,9 @@
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
+        $('#cuota_pagar').val(format2(cuota_pagar,'$'));
+        $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
+        $('#total_pagar').val(format2(total_pagar,'$'));
     } 
  });
 
@@ -61,9 +61,9 @@
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
+        $('#cuota_pagar').val(format2(cuota_pagar,'$'));
+        $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
+        $('#total_pagar').val(format2(total_pagar,'$'));
     } 
  });
 
@@ -89,9 +89,9 @@ $('#fecha_ini').on('change',function(){
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
+        $('#cuota_pagar').val(format2(cuota_pagar,'$'));
+        $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
+        $('#total_pagar').val(format2(total_pagar,'$'));
     } 
  });
 
@@ -109,9 +109,9 @@ $('#fecha_ini').on('change',function(){
          total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
          total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
          cuota_pagar = total_pagar / numero_cuotas;
-         $('#cuota_pagar').val(cuota_pagar);
-         $('#total_pagar_interes').val(total_pagar_interes);
-         $('#total_pagar').val(total_pagar);
+         $('#cuota_pagar').val(format2(cuota_pagar,'$'));
+         $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
+         $('#total_pagar').val(format2(total_pagar,'$'));
      } 
   });
 
@@ -122,9 +122,9 @@ $('#fecha_ini').on('change',function(){
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
+        $('#cuota_pagar').val(format2(cuota_pagar,'$'));
+        $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
+        $('#total_pagar').val(format2(total_pagar,'$'));
     } 
  });
 
@@ -176,17 +176,17 @@ $('#save_loans').on('click',function(){
     fecha_ini =now.getFullYear()+"-"+(month)+"-"+(day)  ; 
     fecha_fin = (now.getFullYear()+1)+"-"+(month )+"-"+(day) ; 
     dia_pago = day;  
-    $('#capital_solicitado').val( capital_solicitado);
+    $('#capital_solicitado').val( format2(capital_solicitado,'$'));
     $('#interes').val( interes);
-    $('#total_pagar').val( total_pagar); 
-    $('#total_pagar_interes').val(total_pagar_interes);
+    $('#total_pagar').val( format2(total_pagar,'$')); 
+    $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
     $('#fecha_ini').val( fecha_ini );
     $('#fecha_fin').val( fecha_fin);
     $('#numero_cuota').val( numero_cuotas); 
     $('#dia_pago').val( dia_pago);
-    $('#cuota_pagar').val( cuotas); 
+    $('#cuota_pagar').val( format2(cuotas,'$')); 
     $('#interes_mora').val( interes_mora);
-    $('#monto_mora').val( monto_mora);
+    $('#monto_mora').val( format2(monto_mora,'$'));
     $('#rango_dia_mora').val( rango_dias_mora);
  }
 
@@ -217,13 +217,13 @@ function verPrestamos( )
            html +=  this.porciento;
            html += '</td>';
            html += '<td>';
-           html +=  this.total_cuotas;
+           html +=  format2(this.total_cuotas,'$');
            html += '</td>';
            html += '<td>';
-           html +=  this.capital_solicitado;
+           html +=  format2(this.capital_solicitado,'$');
            html += '</td>';
            html += '<td>';
-           html +=  (this.capital_solicitado + this.interes_total);
+           html +=  format2((this.capital_solicitado + this.interes_total),'$');
            html += '</td>'; 
            html += '<tr>'; 
        });
@@ -256,16 +256,16 @@ function verPrestamosDetails(id){
         dataType:'json',
         data:{id:id}
     }).done(function(result){
-        $('#capital_solicitado_detail').html(result.capital_solicitado); 
+        $('#capital_solicitado_detail').html(format2(result.capital_solicitado,'$')); 
         $('.modal5-title').html('Detalle de prestamo'); 
-        $('#capital_pagado_detail').html(result.capital_pagado);
-        $('#capital_restante_detail').html(result.capital_restante);
-        $('#interes_total_detail').html(result.interes_total);
+        $('#capital_pagado_detail').html(format2(result.capital_pagado,'$'));
+        $('#capital_restante_detail').html(format2(result.capital_restante,'$'));
+        $('#interes_total_detail').html(format2(result.interes_total,'$'));
         $('#porciento_detail').html(result.porciento+'%');
-        $('#interes_mora_detail').html(result.interes_mora);
-        $('#interes_mora_monto_detail').html(result.interes_mora_monto);
-        $('#interes_mora_pagado_detail').html(result.interes_mora_pagado);
-        $('#total_cuotas_detail').html(result.total_cuotas);
+        $('#interes_mora_detail').html( result.interes_mora );
+        $('#interes_mora_monto_detail').html(format2(result.interes_mora_monto,'$'));
+        $('#interes_mora_pagado_detail').html(format2(result.interes_mora_pagado,'$'));
+        $('#total_cuotas_detail').html(format2(result.total_cuotas,'$'));
         $('#dias_pagos_detail').html(result.dias_pagos);
         $('#numero_cuotas_detail').html(result.numero_cuotas);
         $('#dias_restantes_detail').html(result.dias_restantes);   
@@ -347,7 +347,7 @@ function verTransacction(){
            html +=  this.comentario;
            html += '</td>';
            html += '<td>';
-           html +=  this.monto;
+           html +=  format2(this.monto,'$');
            html += '</td>';   
            html += '<tr>'; 
        });
