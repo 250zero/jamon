@@ -12,10 +12,10 @@
             </div>
 
             <div class="header-right">
-
+<!--    SEE PREMIUN JAMON
                 <a href="message-task.html" class="btn btn-info" title="New Message"><b>30 </b><i class="fa fa-envelope-o fa-2x"></i></a>
-                <a href="message-task.html" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a>
-                <a href="{{url('/')}}/logout" class="btn btn-danger" title="Logout"><i class="fa fa-exclamation-circle fa-2x"></i></a>
+                <a href="message-task.html" class="btn btn-primary" title="New Task"><b>40 </b><i class="fa fa-bars fa-2x"></i></a> -->
+                <a href="{{url('/')}}/logout" class="btn btn-warning" title="Logout"><i class="fa fa-sign-out fa-2x"></i></a>
 
             </div>
         </nav>

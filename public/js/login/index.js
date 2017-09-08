@@ -17,3 +17,15 @@ $('#acceder').on('click',function(){
             toastr.warning(result.msn, 'Advertencia');
     });
 });
+
+$('#username').on('keypress',function(e){
+    if(e.which == 13) {  
+         $('#acceder').trigger('click');   
+    }    
+});
+
+$('#password').on('keypress',function(e){
+    if(e.which == 13) {  
+         $('#acceder').trigger('click');   
+    }    
+});
