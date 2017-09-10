@@ -47,7 +47,7 @@
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
+        $('#cuota_pagar').val(Math.round(cuota_pagar));
         $('#total_pagar_interes').val(total_pagar_interes);
         $('#total_pagar').val(total_pagar);
     } 
@@ -62,7 +62,7 @@
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
+        $('#cuota_pagar').val(Math.round(cuota_pagar));
         $('#total_pagar_interes').val(total_pagar_interes);
         $('#total_pagar').val(total_pagar);
     } 
@@ -90,7 +90,7 @@ $('#fecha_ini').on('change',function(){
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
+        $('#cuota_pagar').val(Math.round(cuota_pagar));
         $('#total_pagar_interes').val(total_pagar_interes);
         $('#total_pagar').val(total_pagar);
     } 
@@ -110,7 +110,7 @@ $('#fecha_ini').on('change',function(){
          total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
          total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
          cuota_pagar = total_pagar / numero_cuotas;
-         $('#cuota_pagar').val(cuota_pagar);
+         $('#cuota_pagar').val(Math.round(cuota_pagar));
          $('#total_pagar_interes').val(total_pagar_interes);
          $('#total_pagar').val(total_pagar);
      } 
@@ -123,7 +123,7 @@ $('#fecha_ini').on('change',function(){
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(cuota_pagar);
+        $('#cuota_pagar').val(Math.round(cuota_pagar));
         $('#total_pagar_interes').val(total_pagar_interes);
         $('#total_pagar').val(total_pagar);
     } 
@@ -174,8 +174,8 @@ $('#save_loans').on('click',function(){
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2); 
-    fecha_ini =now.getFullYear()+"-"+(month)+"-"+(day)  ; 
-    fecha_fin = (now.getFullYear()+1)+"-"+(month )+"-"+(day) ; 
+    fecha_ini =now.getFullYear()+"-"+(month)  ; 
+    fecha_fin = (now.getFullYear()+1)+"-"+(month ) ; 
     dia_pago = day;  
     $('#capital_solicitado').val( capital_solicitado);
     $('#interes').val( interes);
