@@ -30,6 +30,7 @@
     monto_mora = 0;
     rango_dias_mora = 0;
     actualizarValores();
+    $('.modal-title-loans').html('Nuevo Prestamo');
     $('#LoansModalDetail').modal('show');
  });
 
@@ -176,17 +177,17 @@ $('#save_loans').on('click',function(){
     fecha_ini =now.getFullYear()+"-"+(month)+"-"+(day)  ; 
     fecha_fin = (now.getFullYear()+1)+"-"+(month )+"-"+(day) ; 
     dia_pago = day;  
-    $('#capital_solicitado').val( format2(capital_solicitado,'$'));
+    $('#capital_solicitado').val( capital_solicitado);
     $('#interes').val( interes);
-    $('#total_pagar').val( format2(total_pagar,'$')); 
-    $('#total_pagar_interes').val(format2(total_pagar_interes,'$'));
+    $('#total_pagar').val( total_pagar); 
+    $('#total_pagar_interes').val(total_pagar_interes);
     $('#fecha_ini').val( fecha_ini );
     $('#fecha_fin').val( fecha_fin);
     $('#numero_cuota').val( numero_cuotas); 
     $('#dia_pago').val( dia_pago);
-    $('#cuota_pagar').val( format2(cuotas,'$')); 
+    $('#cuota_pagar').val( cuotas); 
     $('#interes_mora').val( interes_mora);
-    $('#monto_mora').val( format2(monto_mora,'$'));
+    $('#monto_mora').val( monto_mora);
     $('#rango_dia_mora').val( rango_dias_mora);
  }
 
