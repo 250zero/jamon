@@ -116,7 +116,7 @@ class PrestamosController extends Controller
         $tr= new Transaccion();  
  
         if($r->tipo_transacction == 1){
-            $prestamo->dias_restantes = $prestamo->total_cuotas - $r->cuotas_a_pagar ;
+            $prestamo->dias_restantes = $prestamo->numero_cuotas - $r->cuotas_a_pagar ;
             $prestamo->dias_pagos = $prestamo->dias_pagos + $r->cuotas_a_pagar ; 
 
             $prestamo->interes_pagado = (( $prestamo->interes_total / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar) + $prestamo->interes_pagado  ;
@@ -126,8 +126,8 @@ class PrestamosController extends Controller
             $prestamo->capital_pagado = (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar) + $prestamo->capital_pagado  ;
              
             $tr->id_producto = $r->id_prestamo;
-            $tr->monto =  (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar);
-            $tr->comentario = $r->comentario_transaccion;
+            $tr->monto =  (( $prestamo->total_cuotas) *  $r->cuotas_a_pagar);
+            $tr->comentario = (empty($r->comentario_transaccion))?'':$r->comentario_transaccion;
 
 
             $prestamo->save();

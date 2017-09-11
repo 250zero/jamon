@@ -115,11 +115,17 @@ $('#fecha_ini').on('change',function(){
          $('#total_pagar').val(total_pagar);
      } 
   });
-
+ 
   $('#numero_cuota').on('keyup',function(){  
     numero_cuotas = $('#numero_cuota').val();
     
     if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2); 
+        fecha_ini =now.getFullYear()+"-"+(month)  ; 
+        fecha_fin = (now.getFullYear()+1)+"-"+(month ) ; 
+        dia_pago = day;  
         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
         cuota_pagar = total_pagar / numero_cuotas;
