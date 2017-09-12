@@ -116,6 +116,10 @@ class PrestamosController extends Controller
         $tr= new Transaccion();  
  
         if($r->tipo_transacction == 1){
+            if(($prestamo->dias_restantes - $r->cuotas_a_pagar) < 0 )
+            {
+                return ['Esta transaccion no puede ser ejcutada,comuniquese con su administrador','status'=>0];
+            }
             $prestamo->dias_restantes = $prestamo->numero_cuotas - $r->cuotas_a_pagar ;
             $prestamo->dias_pagos = $prestamo->dias_pagos + $r->cuotas_a_pagar ; 
 

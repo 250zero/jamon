@@ -53,7 +53,7 @@
                               <div class="col-sm-4"> 
                                   <div class="form-group">
                                       <label>Numero Cuotas</label>
-                                      <input type="number" id="numero_cuota" class="form-control">
+                                      <input type="number" id="numero_cuota" readonly="true" class="form-control">
                                   </div>
                               </div> 
                           </div>

@@ -17,7 +17,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group pago_cuota"  >
-                                            <label>Total de cuotas a pagar</label>
+                                            <label>Total de cuotas a pagar <span id="cuota_label"></span></label>
                                             <input type="number" class="form-control"  id="cuotas_a_pagar">
                                     </div>
                                     <div class="form-group pago_mora" style="display:none">

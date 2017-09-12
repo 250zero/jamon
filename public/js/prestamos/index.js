@@ -10,6 +10,7 @@
  var interes_mora = 0;
  var monto_mora = 0;
  var rango_dias_mora = 0;
+ var dias_restantes=0;
 
  $(document).ready(function(){
     actualizarValores(); 
@@ -38,107 +39,54 @@
 * Operacion de calculo total del capital de prestamo
 * INICIO
 */
- $('#capital_solicitado').on('keyup',function(){
+
+function calcularPrestamo()
+{
+    /**
+     * Utilizamos interes simple, empleando un tiempo constante en meses, donde por cada mes se calcula el interes
+     */
     interes = Math.abs($('#interes').val());
     capital_solicitado =Math.abs($('#capital_solicitado').val());
     numero_cuotas = $('#numero_cuota').val();
     
     if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
-        total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
-        total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
+        total_pagar_interes = (Math.abs(capital_solicitado * (interes/100)*numero_cuotas));
+        total_pagar =Math.abs(capital_solicitado )+ (Math.abs(capital_solicitado * (interes/100)*numero_cuotas))  ;
         cuota_pagar = total_pagar / numero_cuotas;
         $('#cuota_pagar').val(Math.round(cuota_pagar));
         $('#total_pagar_interes').val(total_pagar_interes);
         $('#total_pagar').val(total_pagar);
     } 
+}
+
+
+ $('#capital_solicitado').on('keyup',function(){
+    calcularPrestamo();
  });
 
  $('#interes').on('keyup',function(){
-    interes = Math.abs($('#interes').val());
-    capital_solicitado =Math.abs($('#capital_solicitado').val());
-    numero_cuotas = $('#numero_cuota').val();
-    
-    if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
-        total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
-        total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
-        cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(Math.round(cuota_pagar));
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
-    } 
+    calcularPrestamo();
  });
 
-/*
-* Operacion de calculo total del capital de prestamo
-* FIN
-*/
 
-
-
-/*
-* Operacion de calculo  de cuotas
-* INICIO
-*/
 $('#fecha_ini').on('change',function(){
     var fecha_ini_cal = new Date($('#fecha_ini').val());
     var fecha_fin_cal = new Date($('#fecha_fin').val());  
     var year= fecha_fin_cal.getFullYear() - fecha_ini_cal.getFullYear();
     numero_cuotas = ((fecha_fin_cal.getMonth() - fecha_ini_cal.getMonth()) + 1) + (12*year);
     $('#numero_cuota').val(numero_cuotas);
-    
-    if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
-        total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
-        total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
-        cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(Math.round(cuota_pagar));
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
-    } 
+    calcularPrestamo();
  });
 
  $('#fecha_fin').on('change',function(){
-     var fecha_ini_cal = new Date($('#fecha_ini').val());
-     var fecha_fin_cal = new Date($('#fecha_fin').val()); 
-     interes = Math.abs($('#interes').val());
-     capital_solicitado =Math.abs($('#capital_solicitado').val()); 
-     var year= fecha_fin_cal.getFullYear() - fecha_ini_cal.getFullYear();
-
-     numero_cuotas = ((fecha_fin_cal.getMonth() - fecha_ini_cal.getMonth()) + 1) + (12*year);
-     $('#numero_cuota').val(numero_cuotas);
-     
-     if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
-         total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
-         total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
-         cuota_pagar = total_pagar / numero_cuotas;
-         $('#cuota_pagar').val(Math.round(cuota_pagar));
-         $('#total_pagar_interes').val(total_pagar_interes);
-         $('#total_pagar').val(total_pagar);
-     } 
-  });
- 
-  $('#numero_cuota').on('keyup',function(){  
-    numero_cuotas = $('#numero_cuota').val();
-    
-    if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
-        var now = new Date();
-        var day = ("0" + now.getDate()).slice(-2);
-        var month = ("0" + (now.getMonth() + 1)).slice(-2); 
-        fecha_ini =now.getFullYear()+"-"+(month)  ; 
-        fecha_fin = (now.getFullYear()+1)+"-"+(month ) ; 
-        dia_pago = day;  
-        total_pagar_interes = Math.abs(capital_solicitado * (interes/100))  ;
-        total_pagar =Math.abs(capital_solicitado )+ Math.abs(capital_solicitado * (interes/100))  ;
-        cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(Math.round(cuota_pagar));
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
-    } 
+    var fecha_ini_cal = new Date($('#fecha_ini').val());
+    var fecha_fin_cal = new Date($('#fecha_fin').val());  
+    var year= fecha_fin_cal.getFullYear() - fecha_ini_cal.getFullYear();
+    numero_cuotas = ((fecha_fin_cal.getMonth() - fecha_ini_cal.getMonth()) + 1) + (12*year);
+    $('#numero_cuota').val(numero_cuotas);
+    calcularPrestamo();
  });
 
-/*
-* Operacion de calculo de cuotas
-* FIN
-*/
  
 $('#save_loans').on('click',function(){
     data={
@@ -263,6 +211,7 @@ function verPrestamosDetails(id){
         dataType:'json',
         data:{id:id}
     }).done(function(result){
+       
         $('#capital_solicitado_detail').html(format2(result.capital_solicitado,'$')); 
         $('.modal5-title').html('Detalle de prestamo'); 
         $('#capital_pagado_detail').html(format2(result.capital_pagado,'$'));
@@ -275,6 +224,8 @@ function verPrestamosDetails(id){
         $('#total_cuotas_detail').html(format2(result.total_cuotas,'$'));
         $('#dias_pagos_detail').html(result.dias_pagos);
         $('#numero_cuotas_detail').html(result.numero_cuotas);
+        numero_cuotas = result.numero_cuotas;
+        dias_restantes = result.dias_restantes;
         $('#dias_restantes_detail').html(result.dias_restantes);   
         $('#id_prestamo').val(result.id_prestamo);  
         $('#LoansModalDetailTransac').modal('show');
@@ -284,6 +235,7 @@ function verPrestamosDetails(id){
 
 $('#transaccion_detail').on('click',function(){
     $('#transactionModal').modal('show');
+    $('#cuota_label').html('('+dias_restantes+'/'+numero_cuotas+')');
     $('#tipo_transaccion').val(1);
     $('#cuotas_a_pagar').val(0);
     $('#comentario_transaccion').val('');
@@ -295,6 +247,7 @@ $('#transaccion_detail').on('click',function(){
 $('#tipo_transaccion').on('change',function(){
     if($('#tipo_transaccion').val() == 1)
     {
+        $('#cuota_label').html('('+dias_restantes+'/'+numero_cuotas+')');
         $('.pago_cuota').css('display','block');
         $('.pago_mora').css('display','none');
 
@@ -308,6 +261,19 @@ $('#tipo_transaccion').on('change',function(){
 
 
 $('#save_transacction').on('click',function(){
+    if($('#tipo_transaccion').val() == 1 && $('#cuotas_a_pagar').val() > dias_restantes ){
+        toastr.warning('El numero de cuotas a pagar excede el numero de cuotas restante', 'Advertencia'); 
+        return false;
+    }
+
+    if(  $('#cuotas_a_pagar').val()  < 0 ){
+        toastr.warning('El numero de cuotas a pagar no puede ser menor que cero', 'Advertencia'); 
+        return false;
+    }
+    if(  $('#dia_mora_pagar').val()  < 0 ){
+        toastr.warning('Los dias no puede ser menor que cero', 'Advertencia'); 
+        return false;
+    }
      var data={
          tipo_transacction:$('#tipo_transaccion').val(),
          cuotas_a_pagar:$('#cuotas_a_pagar').val(),
