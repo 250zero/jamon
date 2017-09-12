@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Agenda;
 
 class AgendaController extends Controller
 {
@@ -52,6 +53,32 @@ class AgendaController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function all(Request $r )
+    {
+         $result = [];
+         $data = Agenda::with('rsCliente')->get();
+         foreach($data as $d){ 
+             $color = '';
+            switch($d->estado){
+                case 1:
+                $color = 'blue';
+                break;
+                case 2:
+                $color = 'red';
+                break;
+                case 3:
+                $color = 'green';
+                break;
+            } 
+            $result[] = [
+                'title' => $d->rsCliente->nombre.' '. $d->rsCliente->apellido.' '.$d->comentario,
+                'start' => $d->fecha,
+                'color' =>  $color
+            ];
+         }
+         return $result;
     }
 
     /**

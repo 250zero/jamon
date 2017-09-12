@@ -18,6 +18,10 @@ Route::post('/acceder',  'LoginController@login')->name('acceder');
 
 
 
+Route::get('/agenda/all', 'AgendaController@all');
+
+
+
 Route::get('/clientes', 'ClientesController@index');
 Route::get('/clientes/show', 'ClientesController@show');
 Route::get('/clientes/all', 'ClientesController@all');
