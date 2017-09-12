@@ -11,6 +11,9 @@
  var monto_mora = 0;
  var rango_dias_mora = 0;
  var dias_restantes=0;
+ var pagina_prest= 1 ;
+ var ultima_pagina_prest = 0;
+
 
  $(document).ready(function(){
     actualizarValores(); 
@@ -191,7 +194,7 @@ function verPrestamos( )
    
 $('#loans_next').on('click',function(){
     if(pagina_prest < ultima_pagina_prest ){ 
-        pagina = pagina + 1;
+        pagina_prest = pagina_prest + 1;
         verPrestamos( );
     }
 });
@@ -224,6 +227,23 @@ function verPrestamosDetails(id){
         $('#total_cuotas_detail').html(format2(result.total_cuotas,'$'));
         $('#dias_pagos_detail').html(result.dias_pagos);
         $('#numero_cuotas_detail').html(result.numero_cuotas);
+        if(result.estado == 1)
+        {    
+            $('#estado_prestamo').html('Activo');
+            $('#estado_prestamo').css('color','#35ad0f');
+        }
+        if(result.estado == 0)
+        {    
+            $('#estado_prestamo').html('Anulado');
+            $('#estado_prestamo').css('color','#d82525');  
+            $('#estado_prestamo').css('font-weight','bold');
+        }
+        if(result.estado == 3)
+        {    
+            $('#estado_prestamo').html('Pagado');
+            $('#estado_prestamo').css('color','#2552d8');     
+            $('#estado_prestamo').css('font-weight','bold');   
+        }
         numero_cuotas = result.numero_cuotas;
         dias_restantes = result.dias_restantes;
         $('#dias_restantes_detail').html(result.dias_restantes);   

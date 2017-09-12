@@ -62,6 +62,10 @@
                                                    <td><b>Numero de Cuotas Restantes</b></td>
                                                    <td id="dias_restantes_detail"></td>
                                                 </tr> 
+                                               <tr>
+                                                   <td><b>Estado del Prestamo</b></td>
+                                                   <td id="estado_prestamo"></td>
+                                                </tr> 
                                                 <tr>
                                                     <td><button id="transaccion_detail" class="btn btn-warning" >Realizar Transacción</button> </td>
                                                     <td> </td>

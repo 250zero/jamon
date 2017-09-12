@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Prestamos;
+use App\Models\Agenda;
 use App\Models\Transaccion;
+use Illuminate\Support\Facades\DB;
 
 class PrestamosController extends Controller
 {
@@ -57,6 +59,19 @@ class PrestamosController extends Controller
         $create->estado = 1; 
         $create->save();
         if( $create->id_prestamo > 0){
+            if($r->numero_cuotas > 1)
+            {
+                for($i = 0 ; $i <= $r->numero_cuotas ; $i++ )
+                {
+                    DB::table('agenda')->insert([
+                        'id_producto' => $create->id_prestamo,
+                        'id_cliente' => $r->id_cliente,
+                        'fecha' => DB::raw('DATE_ADD( curdate(), INTERVAL '.($i+1).' MONTH )'),
+                        'estado' => 1,
+                        'comentario' =>'Cuota a pagar: '.$r->cuota_pagar 
+                    ]);
+                }
+            }
             return ['msn'=>'Prestamo registrado con exito','status'=>1];
         } 
         return ['msn'=>'Favor comunicarse con el administrador','status'=>0];
@@ -93,7 +108,7 @@ class PrestamosController extends Controller
      */
     public function client(Request $request)
     {
-        return Prestamos::where('id_cliente',$request->id)->paginate(5);
+        return Prestamos::where('id_cliente',$request->id)->where('estado',1)->paginate(5);
     }
 
     /**
