@@ -8,6 +8,7 @@ use App\Models\Agenda;
 class AgendaController extends Controller
 {
     private $variable;
+    private $limit;
      
     function __construct(){
         $this->middleware('auth');
@@ -16,6 +17,7 @@ class AgendaController extends Controller
              'favicon' => asset('img/log.png'), 
              'ScheduleClass' => 'class="active-menu"' 
          ];
+        $this->limit = 10;
     }
 
     public function index()
@@ -87,6 +89,11 @@ class AgendaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showDay(Request $r )
+    {
+        return  Agenda::with('rsCliente')->where('fecha',$r->fecha)->paginate($this->limit);
+    }
+
     public function edit($id)
     {
         //

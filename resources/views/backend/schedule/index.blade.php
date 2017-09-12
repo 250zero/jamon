@@ -13,7 +13,8 @@
         <!-- /. PAGE WRAPPER  -->
  
 
- @include('backend..template.footer')
+ @include('backend.template.footer')
+ @include('backend.modals.agenda.index')
  <script src="../node_modules/moment/moment.js"></script>
  <script src="../node_modules/fullcalendar/dist/fullcalendar.min.js"></script>
  

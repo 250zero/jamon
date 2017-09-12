@@ -19,6 +19,7 @@ Route::post('/acceder',  'LoginController@login')->name('acceder');
 
 
 Route::get('/agenda/all', 'AgendaController@all');
+Route::get('/agenda/show/day','AgendaController@showDay');
 
 
 
