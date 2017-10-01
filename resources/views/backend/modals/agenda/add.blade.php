@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-300" role="dialog" id="AgendaModal">
+<div class="modal fade" tabindex="-300" role="dialog" id="AgendaAddModal">
   <div class="modal-dialog" role="document"  style="width:55%" >
     <div class="modal-content">
       <div class="modal-header">

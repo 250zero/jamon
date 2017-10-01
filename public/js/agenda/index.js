@@ -88,7 +88,7 @@ $(document).ready(function() {
            $('#agenda_info_pag').html('Mostrando pagina '+result.current_page+' de '+result.last_page+', de '+result.total+' registros');
            $("#consultando_search tbody").html(html);  
            $('#AgendaModal').modal('show');
-           $('.modal3-title-agenda').html('Agenda '+date.format());
+           $('.modal3-title-agenda').html('Agenda del '+date.format());
         }).fail(function(){
 
         });
