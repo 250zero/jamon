@@ -37,3 +37,9 @@ Route::get('/prestamos/transacction/all','PrestamosController@transacctionShow')
 Route::post('/prestamos/transacction','PrestamosController@transacction');
 
 Route::get('/reportes', 'ReportesController@index');
+
+
+
+
+
+Route::get('/config', 'ConfigurationController@index');

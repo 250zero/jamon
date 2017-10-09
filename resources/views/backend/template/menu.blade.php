@@ -44,7 +44,8 @@
                     </li>
                     <li>
                         <a   <?=(!empty($clientclass))?$clientclass:''?>  href="{{url('/')}}/clientes"><i class="fa fa-user "></i>Clientes</a>
-                    </li><li>
+                    </li>
+                    <li>
                         <a  <?=(!empty($ReportClass))?$ReportClass:''?>  href="{{url('/')}}/reportes"><i class="fa fa-bar-chart-o "></i>Reportes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             
@@ -147,10 +148,12 @@
                             </li>
                         </ul>
                     </li>
+                   -->
                    
-                    <li>
-                        <a href="blank.html"><i class="fa fa-square-o "></i>Blank Page</a> 
-                    </li> -->
+                   <li>
+                        <a   <?=(!empty($configclass))?$configclass:''?>  href="{{url('/')}}/config"><i class="fa fa-cog "></i>Configuración</a>
+                   </li> 
+
                 </ul>
 
             </div>
