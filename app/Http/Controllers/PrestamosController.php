@@ -158,8 +158,7 @@ class PrestamosController extends Controller
             $prestamo->interes_mora_pagado = ($prestamo->interes_mora_monto * (  $r->dia_mora_pagar / $prestamo->dias_mora))  +  $prestamo->interes_mora_pagado  ;
              $tr->id_producto = $r->id_prestamo;
             $tr->monto =  (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar);
-            $tr->comentario = $r->comentario_transaccion;
-
+            $tr->comentario = $r->comentario_transaccion; 
             $prestamo->save();
             $tr->save();
             return ['msn'=>'Transaccion realizada con exito','status'=>1]; 

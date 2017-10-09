@@ -45,27 +45,22 @@
                     <li>
                         <a   <?=(!empty($clientclass))?$clientclass:''?>  href="{{url('/')}}/clientes"><i class="fa fa-user "></i>Clientes</a>
                     </li><li>
-                        <a  <?=(!empty($ReportClass))?$ReportClass:''?>  href="{{url('/')}}/reportes"><i class="fa fa-bar-chart-o "></i>Reportes</a>
-                    </li>
-                    <!-- <li>
-                        <a href="#"><i class="fa fa-desktop "></i>UI Elements <span class="fa arrow"></span></a>
-                         <ul class="nav nav-second-level">
+                        <a  <?=(!empty($ReportClass))?$ReportClass:''?>  href="{{url('/')}}/reportes"><i class="fa fa-bar-chart-o "></i>Reportes <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            
                             <li>
-                                <a href="panel-tabs.html"><i class="fa fa-toggle-on"></i>Tabs & Panels</a>
-                            </li>
-                            <li>
-                                <a href="notification.html"><i class="fa fa-bell "></i>Notifications</a>
+                                <a   href="{{url('/')}}/reportes/mora"><i class="fa fa-bell "></i>Clientes en Mora</a>
                             </li>
                              <li>
-                                <a href="progress.html"><i class="fa fa-circle-o "></i>Progressbars</a>
+                                <a  href="{{url('/')}}/reportes/historial"><i class="fa fa-calendar "></i>Historial de Cliente</a>
                             </li>
                              <li>
-                                <a href="buttons.html"><i class="fa fa-code "></i>Buttons</a>
+                                <a  href="{{url('/')}}/reportes/historial/prestamos"><i class="fa fa-calendar "></i>Historial de Prestamos</a>
                             </li>
                              <li>
-                                <a href="icons.html"><i class="fa fa-bug "></i>Icons</a>
+                                <a  href="{{url('/')}}/reportes/historial/prestamos"><i class="fa fa-dashboard "></i>Estado Actual</a>
                             </li>
-                             <li>
+                             <!-- <li>
                                 <a href="wizard.html"><i class="fa fa-bug "></i>Wizard</a>
                             </li>
                              <li>
@@ -74,11 +69,11 @@
                              <li>
                                 <a href="grid.html"><i class="fa fa-eyedropper "></i>Grid</a>
                             </li>
-                            
+                             -->
                            
                         </ul>
-                    </li>
-                     <li>
+                    </li> 
+                     <!-- <li>
                         <a href="#"><i class="fa fa-yelp "></i>Extra Pages <span class="fa arrow"></span></a>
                          <ul class="nav nav-second-level">
                             <li>
@@ -154,7 +149,7 @@
                     </li>
                    
                     <li>
-                        <a href="blank.html"><i class="fa fa-square-o "></i>Blank Page</a>
+                        <a href="blank.html"><i class="fa fa-square-o "></i>Blank Page</a> 
                     </li> -->
                 </ul>
 
