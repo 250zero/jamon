@@ -6,7 +6,14 @@
       <h4 class="modal-title-loans">Modal title</h4>
     </div>
     <div class="modal-body"> 
-                  <div class="row">
+                 <div class="col-sm-6 form-group">
+                     <select id="periodo_prestamo" class="form-control">
+                     <option value="0">Seleccionar Periodo de Pago</option>
+                     <option value="1">Quincenal</option>    
+                     <option  value="2">Mensual</option>
+                     </select>
+                 </div>
+                  <div class="row hide">
                           <div class="col-sm-12"> 
                               <div class="col-sm-3"> 
                                   <div class="form-group">
@@ -36,7 +43,7 @@
                               </div> 
                           </div>
                   </div> 
-                 <div class="row">
+                 <div class="row hide">
                           <div class="col-sm-12"> 
                               <div class="col-sm-4"> 
                                   <div class="form-group">
@@ -58,7 +65,7 @@
                               </div> 
                           </div>
                   </div>   
-                  <div class="row">
+                  <div class="row hide">
                           <div class="col-sm-12"> 
                               <div class="col-sm-4"> 
                                   <div class="form-group">
@@ -80,7 +87,7 @@
                               </div> 
                           </div>
                   </div>   
-                  <div class="row">
+                  <div class="row hide">
                           <div class="col-sm-12"> 
                                   <div class="col-sm-6"> 
                                       <h3>Mora por dias atrasados</h3><br>
