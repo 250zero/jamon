@@ -46,3 +46,9 @@ Route::get('/reportes', 'ReportesController@index');
 
 
 Route::get('/config', 'ConfigurationController@index');
+
+Route::get('/test/pdf', function(){
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
+});
