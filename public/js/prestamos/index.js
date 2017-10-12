@@ -12,6 +12,7 @@
  var rango_dias_mora = 0;
  var dias_restantes=0;
  var pagina_prest= 1 ;
+ var tipo_tiempo = 0;
  var ultima_pagina_prest = 0;
 
 
@@ -19,6 +20,14 @@
     actualizarValores(); 
  });
 
+ $('#periodo_prestamo').on('change',function(){
+        if(this.value > 0){
+            $('#LoansModalDetail .modal-body .row').removeClass('hide');
+            tipo_tiempo = this.value;
+        }else{
+            $('#LoansModalDetail .modal-body .row').addClass('hide');
+        }
+ });
 
  $('#add_loans').on('click',function(){
     capital_solicitado = 0;
@@ -33,7 +42,7 @@
     interes_mora = 0;
     monto_mora = 0;
     rango_dias_mora = 0;
-    actualizarValores();
+    // actualizarValores();
     $('.modal-title-loans').html('Nuevo Prestamo');
     $('#LoansModalDetail').modal('show');
  });

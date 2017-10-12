@@ -48,7 +48,7 @@
                               <div class="col-sm-4"> 
                                   <div class="form-group">
                                       <label>Fecha Inicio</label>
-                                      <input type="month" id="fecha_ini" class="form-control">
+                                      <input type="date" step="15"  id="fecha_ini" class="form-control">
                                   </div>
                               </div>
                               <div class="col-sm-4"> 
