@@ -26,13 +26,13 @@
                     <li>
                         <div  >
                             <img src="{{asset('img/log.png')}}" style="
-    width: 200px;
-    height: 250px;
-    padding: 0px;
-    margin-top: -40px;
-    margin-left: 3px;
-    margin-bottom: -70px;
-"  />
+                                                                        width: 200px;
+                                                                        height: 250px;
+                                                                        padding: 0px;
+                                                                        margin-top: -40px;
+                                                                        margin-left: 3px;
+                                                                        margin-bottom: -70px;
+                                                                    "  />
  
                         </div>
 
@@ -45,6 +45,9 @@
                     <li>
                         <a   <?=(!empty($clientclass))?$clientclass:''?>  href="{{url('/')}}/clientes"><i class="fa fa-user "></i>Clientes</a>
                     </li>
+                    <li>
+                        <a   <?=(!empty($prestamosClass))?$prestamosClass:''?>  href="{{url('/')}}/prestamos"><i class="fa fa-money "></i>Prestamos</a>
+                    </li> 
                     <li>
                         <a  <?=(!empty($ReportClass))?$ReportClass:''?>  href="{{url('/')}}/reportes"><i class="fa fa-bar-chart-o "></i>Reportes <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">

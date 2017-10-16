@@ -28,9 +28,11 @@ Route::get('/clientes/show', 'ClientesController@show');
 Route::get('/clientes/all', 'ClientesController@all');
 Route::post('/clientes', 'ClientesController@create');
 Route::put('/clientes', 'ClientesController@store'); 
+Route::get('/clientes/list', 'ClientesController@list'); 
 Route::get('/agenda', 'AgendaController@index');
 
 Route::post('/prestamos','PrestamosController@create');
+Route::get('/prestamos','PrestamosController@index');
 Route::get('/prestamos/clientes','PrestamosController@client');
 Route::get('/prestamos/detail','PrestamosController@show'); 
 Route::get('/prestamos/transacction/all','PrestamosController@transacctionShow');
@@ -46,6 +48,7 @@ Route::get('/reportes', 'ReportesController@index');
 
 
 Route::get('/config', 'ConfigurationController@index');
+Route::get('/configuracion', 'ConfigurationController@configs');
 
 Route::get('/test/pdf', function(){
     $pdf = App::make('dompdf.wrapper');

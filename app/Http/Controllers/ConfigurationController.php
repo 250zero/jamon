@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Configuration;
 
 class ConfigurationController extends Controller
 {
@@ -21,5 +22,9 @@ class ConfigurationController extends Controller
     public function index()
     {
         return view('backend/config/index',$this->variables);
+    }
+    public function configs(Request $r)
+    {
+        return Configuration::where('type',$r->tipo)->get() ;
     }
 }

@@ -95,6 +95,13 @@ class ClientesController extends Controller
                        ->paginate($this->limit);
     }
 
+    public function list(Request $request)
+    {
+        return Cliente::select(['nombre','apellido','id_cliente'])
+                       ->where('estado','1')
+                       ->get();
+    }
+
     public function show(Request $request)
     {
         return Cliente::where('id_cliente',$request->id)->first();

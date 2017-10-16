@@ -19,17 +19,10 @@
  $(document).ready(function(){
     actualizarValores(); 
  });
+ 
+ $('#LoansModalDetail').modal('show');
 
- $('#periodo_prestamo').on('change',function(){
-        if(this.value > 0){
-            $('#LoansModalDetail .modal-body .row').removeClass('hide');
-            tipo_tiempo = this.value;
-        }else{
-            $('#LoansModalDetail .modal-body .row').addClass('hide');
-        }
- });
-
- $('#add_loans').on('click',function(){
+ $('#btn_nuevo').on('click',function(){
     capital_solicitado = 0;
     interes = 0;
     total_pagar = 0;

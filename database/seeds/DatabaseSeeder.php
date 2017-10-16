@@ -34,5 +34,15 @@ class DatabaseSeeder extends Seeder
             ['nombre' => 'Eduard','apellido' => 'Gil', 'telefono' => '829-155-6234','celular'=>'829-652-3632','email'=>'ejemplo17@gmail.com','estado'=>1],
 
         ]);
+        DB::table('configurations')->insert([
+            ['names' => 'Metodo Absoluto','type' => '1'],
+            ['names' => 'Metodo Insoluto','type' => '1'],
+            ['names' => 'Quincenal','type' => '2'],
+            ['names' => 'Mensual','type' => '2'],
+            ['names' => 'Semestral','type' => '2'],
+            ['names' => 'Trimestral','type' => '2'],
+            ['names' => 'Cuatrimestral','type' => '2'],
+            ['names' => 'Anual','type' => '2'] 
+        ]);
     }
 }

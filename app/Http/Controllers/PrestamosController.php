@@ -14,9 +14,9 @@ class PrestamosController extends Controller
     function __construct(){
         $this->middleware('auth');
         $this->variables = [
-             'titulo' => 'Inicio',
+             'titulo' => 'Prestamo',
              'favicon' => asset('img/log.png'), 
-             'ScheduleClass' => 'class="active-menu"' 
+             'prestamosClass' => 'class="active-menu"' 
          ];
     }
 
