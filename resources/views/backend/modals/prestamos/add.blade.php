@@ -64,61 +64,19 @@
                                                     <div class="col-sm-3"> 
                                                             <div class="form-group">
                                                                 <label>Numero de Cuotas</label>
-                                                                <input type="text"   id="fecha_ini" class="form-control">
+                                                                <input type="text"   id="num_cuotas" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3"> 
                                                             <div class="form-group">
-                                                                <label>Dia de Pago</label>
+                                                                <label>Dias de Pago</label>
                                                                 <input type="text" id="dia_pago"  name="dia_pago" class="form-control">
                                                             </div>
                                                         </div> 
                                                 </div>
                                         </div>  
-                                            <div class="row  ">
-                                                    <div class="col-sm-12"> 
-                                                        <div class="col-sm-4"> 
-                                                            <div class="form-group">
-                                                                <label>Fecha Inicio</label>
-                                                                <input type="date" step="15"  id="fecha_ini" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4"> 
-                                                            <div class="form-group">
-                                                                <label>Fecha Fin</label>
-                                                                <input type="month" id="fecha_fin" class="form-control">
-                                                            </div>
-                                                        </div> 
-                                                        <div class="col-sm-4"> 
-                                                            <div class="form-group">
-                                                                <label>Numero Cuotas</label>
-                                                                <input type="number" id="numero_cuota" readonly="true" class="form-control">
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                            </div>  
-                                            <div class="row  ">
-                                                    <div class="col-sm-12"> 
-                                                        <div class="col-sm-4"> 
-                                                            <div class="form-group">
-                                                                <label>Dia de Pago</label>
-                                                                <input type="number" id="dia_pago" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4"> 
-                                                            <div class="form-group">
-                                                                <label>Cuota a pagar</label>
-                                                                <input type="number" readonly="true" id="cuota_pagar" class="form-control">
-                                                            </div>
-                                                        </div> 
-                                                        
-                                                        <div class="col-sm-4"> 
-                                                            <!-- <div class="form-group"><br> 
-                                                                <button class="btn btn-primary">Tabla Amortización</label>
-                                                            </div>  -->
-                                                        </div> 
-                                                    </div>
-                                            </div>   
+                                       
+                                           
                         </div>
                         <div role="tabpanel" class="tab-pane" id="penalidad">
                                                 <div class="row   ">
@@ -129,13 +87,7 @@
                                                 </div>
                                                 <div class="col-sm-12"> 
                                                     
-                                                    <div class="col-sm-4"> 
-                                                        
-                                                        <div class="form-group">
-                                                            <label>% interes</label>
-                                                            <input type="number" id="interes_mora" class="form-control">
-                                                        </div>
-                                                    </div>
+                                                   
                                                     <div class="col-sm-4"> 
                                                         <div class="form-group">
                                                             <label>Monto</label>
@@ -153,7 +105,46 @@
                         
                         
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="impresion">...</div>
+                        <div role="tabpanel" class="tab-pane" id="impresion"> 
+                                <div class="row  ">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-3"><br>
+                                                <button class="btn btn-primary" id="generar_proyeccion"><li class="fa fa-spinner"></li> Generar Proyección</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row  " id="prestamos_vista_previa" style="">
+                                
+                                         <!-- <div class="col-sm-12"> 
+                                             <div class="col-sm-3"> 
+                                                 <div class="form-group">
+                                                     <label>Capital a Solicitar</label>
+                                                     <input type="number" id="capital_solicitado" class="form-control"> 
+                                                     <label></label>
+                                                 </div>
+                                             </div>
+                                             <div class="col-sm-3"> 
+                                                 <div class="form-group">
+                                                     <label>% Interes</label>
+                                                     <input type="number" id="interes" class="form-control">
+                                                     <label></label>
+                                                 </div>
+                                             </div> 
+                                             <div class="col-sm-3"> 
+                                                     <div class="form-group">
+                                                         <label>Numero de Cuotas</label>
+                                                         <input type="text"   id="fecha_ini" class="form-control">
+                                                     </div>
+                                                 </div>
+                                                 <div class="col-sm-3"> 
+                                                     <div class="form-group">
+                                                         <label>Dias de Pago</label>
+                                                         <input type="text" id="dia_pago"  name="dia_pago" class="form-control">
+                                                     </div>
+                                                 </div> 
+                                         </div> -->
+                                 </div>  
+                        </div>
                     </div>
                     <!-- final Tab panes -->
                     </div>

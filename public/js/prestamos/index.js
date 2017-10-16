@@ -1,41 +1,28 @@
  var capital_solicitado = 0;
  var interes = 0;
- var total_pagar = 0;
- var total_pagar_interes=0;
- var fecha_ini = '';
- var fecha_fin = '';
- var numero_cuotas = 13;
- var dia_pago = '';
- var cuotas = 0;
- var interes_mora = 0;
+ var numero_cuotas = 0;
+ var dia_pago = '1'; 
  var monto_mora = 0;
- var rango_dias_mora = 0;
- var dias_restantes=0;
+ var rango_dia_mora = 0;
+ var metodologia = 1;
+ var periodo = 1;
+ var client = 0;
+
+
  var pagina_prest= 1 ;
- var tipo_tiempo = 0;
  var ultima_pagina_prest = 0;
 
 
- $(document).ready(function(){
-    actualizarValores(); 
+ $(document).ready(function(){ 
+    setearValores();
  });
  
  $('#LoansModalDetail').modal('show');
 
  $('#btn_nuevo').on('click',function(){
-    capital_solicitado = 0;
-    interes = 0;
-    total_pagar = 0;
-    total_pagar_interes=0;
-    fecha_ini = '';
-    fecha_fin = '';
-    numero_cuotas = 13;
-    dia_pago = '';
-    cuotas = 0;
-    interes_mora = 0;
-    monto_mora = 0;
-    rango_dias_mora = 0;
-    // actualizarValores();
+    actualizarValores();
+    setearValores();
+    $('#generar_proyeccion').trigger('click');
     $('.modal-title-loans').html('Nuevo Prestamo');
     $('#LoansModalDetail').modal('show');
  });
@@ -45,110 +32,36 @@
 * INICIO
 */
 
-function calcularPrestamo()
-{
-    /**
-     * Utilizamos interes simple, empleando un tiempo constante en meses, donde por cada mes se calcula el interes
-     */
-    interes = Math.abs($('#interes').val());
-    capital_solicitado =Math.abs($('#capital_solicitado').val());
-    numero_cuotas = $('#numero_cuota').val();
-    
-    if(capital_solicitado > 0  && (interes > 0 && interes < 100)){
-        total_pagar_interes = (Math.abs(capital_solicitado * (interes/100)*numero_cuotas));
-        total_pagar =Math.abs(capital_solicitado )+ (Math.abs(capital_solicitado * (interes/100)*numero_cuotas))  ;
-        cuota_pagar = total_pagar / numero_cuotas;
-        $('#cuota_pagar').val(Math.round(cuota_pagar));
-        $('#total_pagar_interes').val(total_pagar_interes);
-        $('#total_pagar').val(total_pagar);
-    } 
-}
-
-
- $('#capital_solicitado').on('keyup',function(){
-    calcularPrestamo();
- });
-
- $('#interes').on('keyup',function(){
-    calcularPrestamo();
- });
-
-
-$('#fecha_ini').on('change',function(){
-    var fecha_ini_cal = new Date($('#fecha_ini').val());
-    var fecha_fin_cal = new Date($('#fecha_fin').val());  
-    var year= fecha_fin_cal.getFullYear() - fecha_ini_cal.getFullYear();
-    numero_cuotas = ((fecha_fin_cal.getMonth() - fecha_ini_cal.getMonth()) + 1) + (12*year);
-    $('#numero_cuota').val(numero_cuotas);
-    calcularPrestamo();
- });
-
- $('#fecha_fin').on('change',function(){
-    var fecha_ini_cal = new Date($('#fecha_ini').val());
-    var fecha_fin_cal = new Date($('#fecha_fin').val());  
-    var year= fecha_fin_cal.getFullYear() - fecha_ini_cal.getFullYear();
-    numero_cuotas = ((fecha_fin_cal.getMonth() - fecha_ini_cal.getMonth()) + 1) + (12*year);
-    $('#numero_cuota').val(numero_cuotas);
-    calcularPrestamo();
- });
+ 
+ 
 
  
-$('#save_loans').on('click',function(){
+
+ 
+$('#generar_proyeccion').on('click',function(){
+    actualizarValores();
     data={
-        capital_solicitado: $('#capital_solicitado').val(),
-        porciento: $('#interes').val( ),
-        total_pagar: $('#total_pagar').val( ),
-        total_pagar_interes: $('#total_pagar_interes').val(),
-        numero_cuotas: $('#numero_cuota').val( ),
-        dias_pagos: $('#dia_pago').val( ),
-        cuota_pagar: $('#cuota_pagar').val( ),
-        interes_mora: $('#interes_mora').val( ),
-        monto_mora: $('#monto_mora').val( ),
-        dias_mora:$('#rango_dia_mora').val(), 
-        _token:$('input[name=_token]').val(),
-        id_cliente :$('#id_client').val() 
+          capital_solicitado : capital_solicitado,
+          interes :interes,
+          numero_cuotas :numero_cuotas,
+          dia_pago :dia_pago, 
+          monto_mora:monto_mora,
+          rango_dia_mora :rango_dia_mora,
+          metodologia :metodologia,
+          periodo :periodo,
+          client :client 
     };  
         $.ajax({
-            url: BASE_URL + 'prestamos' ,
-            method: 'post' ,
-            dataType:'json',
+            url: BASE_URL + 'prestamos/vista/previa' ,
+            method: 'get' ,
+            dataType:'html',
             data:data,            
         }).done(function(result){
-                if(result.status > 0)
-                { 
-                    $('#LoansModalDetail').modal('hide');
-                    toastr.success(result.msn, 'Operación exitosa'); 
-                    verPrestamos();
-                    return true;
-                }
-                toastr.warning(result.msn, 'Advertencia'); 
-                return false; 
+                 $('#prestamos_vista_previa').html(result);
         }); 
 
 });
 
-
-
- function actualizarValores(){
-    var now = new Date();
-    var day = ("0" + now.getDate()).slice(-2);
-    var month = ("0" + (now.getMonth() + 1)).slice(-2); 
-    fecha_ini =now.getFullYear()+"-"+(month)  ; 
-    fecha_fin = (now.getFullYear()+1)+"-"+(month ) ; 
-    dia_pago = day;  
-    $('#capital_solicitado').val( capital_solicitado);
-    $('#interes').val( interes);
-    $('#total_pagar').val( total_pagar); 
-    $('#total_pagar_interes').val(total_pagar_interes);
-    $('#fecha_ini').val( fecha_ini );
-    $('#fecha_fin').val( fecha_fin);
-    $('#numero_cuota').val( numero_cuotas); 
-    $('#dia_pago').val( dia_pago);
-    $('#cuota_pagar').val( cuotas); 
-    $('#interes_mora').val( interes_mora);
-    $('#monto_mora').val( monto_mora);
-    $('#rango_dia_mora').val( rango_dias_mora);
- }
 
 
 
@@ -350,4 +263,30 @@ function verTransacction(){
        ultima_pagina_prest = result.last_page;
        $('#info_pag_loans_trans').html('Mostrando pagina '+result.current_page+' de '+result.last_page+', de '+result.total+' registros');
     });  
+}
+
+function setearValores()
+{    
+    $('#capital_solicitado').val(capital_solicitado);
+    $('#interes').val(interes);
+    $('#num_cuotas').val(numero_cuotas);
+    $('#dia_pago').val(dia_pago);
+    $('#monto_mora').val(monto_mora);
+    $('#rango_dia_mora').val(rango_dia_mora);
+    $('#method_loans').val(metodologia);
+    $('#period_loans').val(periodo );
+    $('#client_loans').val(client);
+}
+
+function actualizarValores()
+{    
+    capital_solicitado = $('#capital_solicitado').val();
+    interes = $('#interes').val();
+    numero_cuotas = $('#num_cuotas').val( );
+    dia_pago = $('#dia_pago').val(); 
+    monto_mora =$('#monto_mora').val( );
+    rango_dia_mora =  $('#rango_dia_mora').val( );
+    metodologia =  $('#method_loans').val( );
+    periodo =  $('#period_loans').val( );
+    client =  $('#client_loans').val( );
 }

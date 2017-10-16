@@ -118,9 +118,9 @@ class PrestamosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function preview(Request $request )
+    { 
+        return view('backend/loans/preview',['data'=>$request->all()]);
     }
     public function transacction(Request $r)
     {
