@@ -58,8 +58,7 @@
 </div>
 <!-- /. PAGE WRAPPER  -->
  
-@include('backend.modals.cliente.index') 
-@include('backend.modals.prestamos.add')
+@include('backend.modals.cliente.index')  
 @include('backend.modals.prestamos.index')
 @include('backend.modals.prestamos.transacction')
 @include('backend.template.footer')

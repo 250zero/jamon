@@ -14,23 +14,28 @@ class CreatePrestamosTable extends Migration
     public function up()
     {
         Schema::create('prestamos', function (Blueprint $table){
-            $table->increments('id_prestamo');
-            $table->integer('porciento');
+            $table->increments('id_prestamo'); 
             $table->integer('id_cliente');
             $table->integer('numero_cuotas');
             $table->float('capital_solicitado',12,2);
             $table->float('capital_pagado');
             $table->float('capital_restante');
+            $table->integer('metodologia'); 
+            $table->integer('interes');
             $table->float('interes_pagado');
             $table->float('interes_restante');
-            $table->float('interes_total');
-            $table->float('interes_mora_pagado');
-            $table->float('interes_mora_monto');
-            $table->float('interes_mora');
-            $table->float('total_cuotas');
-            $table->integer('dias_restantes');
-            $table->integer('dias_pagos'); //fecha de pago
+            $table->float('interes_total'); 
+            $table->float('mora_pagado');
+            $table->float('mora_monto');
             $table->integer('dias_mora');
+            $table->integer('dias_mora_pagados'); 
+            $table->integer('cuotas');
+            $table->float('cuotas_pagada');
+            $table->float('cuotas_restante');
+            $table->float('cuotas_monto');
+            $table->float('cuotas_interes');
+            $table->float('cuotas_capital'); 
+            $table->integer('dias_pago');  
             $table->integer('estado');
             $table->timestamps();
         });

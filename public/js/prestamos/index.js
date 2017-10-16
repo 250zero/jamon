@@ -27,11 +27,31 @@
     $('#LoansModalDetail').modal('show');
  });
 
-/*
-* Operacion de calculo total del capital de prestamo
-* INICIO
-*/
-
+ function setearValores()
+ {    
+     $('#capital_solicitado').val(capital_solicitado);
+     $('#interes').val(interes);
+     $('#num_cuotas').val(numero_cuotas);
+     $('#dia_pago').val(dia_pago);
+     $('#monto_mora').val(monto_mora);
+     $('#rango_dia_mora').val(rango_dia_mora);
+     $('#method_loans').val(metodologia);
+     $('#period_loans').val(periodo );
+     $('#client_loans').val(client);
+ }
+ 
+ function actualizarValores()
+ {    
+     capital_solicitado = $('#capital_solicitado').val();
+     interes = $('#interes').val();
+     numero_cuotas = $('#num_cuotas').val( );
+     dia_pago = $('#dia_pago').val(); 
+     monto_mora =$('#monto_mora').val( );
+     rango_dia_mora =  $('#rango_dia_mora').val( );
+     metodologia =  $('#method_loans').val( );
+     periodo =  $('#period_loans').val( );
+     client =  $('#client_loans').val( );
+ }
  
  
 
@@ -263,30 +283,4 @@ function verTransacction(){
        ultima_pagina_prest = result.last_page;
        $('#info_pag_loans_trans').html('Mostrando pagina '+result.current_page+' de '+result.last_page+', de '+result.total+' registros');
     });  
-}
-
-function setearValores()
-{    
-    $('#capital_solicitado').val(capital_solicitado);
-    $('#interes').val(interes);
-    $('#num_cuotas').val(numero_cuotas);
-    $('#dia_pago').val(dia_pago);
-    $('#monto_mora').val(monto_mora);
-    $('#rango_dia_mora').val(rango_dia_mora);
-    $('#method_loans').val(metodologia);
-    $('#period_loans').val(periodo );
-    $('#client_loans').val(client);
-}
-
-function actualizarValores()
-{    
-    capital_solicitado = $('#capital_solicitado').val();
-    interes = $('#interes').val();
-    numero_cuotas = $('#num_cuotas').val( );
-    dia_pago = $('#dia_pago').val(); 
-    monto_mora =$('#monto_mora').val( );
-    rango_dia_mora =  $('#rango_dia_mora').val( );
-    metodologia =  $('#method_loans').val( );
-    periodo =  $('#period_loans').val( );
-    client =  $('#client_loans').val( );
 }
