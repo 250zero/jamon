@@ -25,50 +25,71 @@ class PrestamosController extends Controller
         return view('backend/loans/index',$this->variables);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create(Request $r)
     {
-        if(!$r->has('id_cliente')){
-            return ['msn'=>'No se pudo encontrar el cliente','status'=>0];
-        }
-        if($r->id_cliente <= 0){
-            return ['msn'=>'No se pudo encontrar el cliente','status'=>0];
-        }
-        $create = new Prestamos();
-        $create->porciento = $r->porciento;
-        $create->id_cliente = $r->id_cliente;
+        // dd($r->all());
+        $create = new Prestamos(); 
+        $create->id_cliente = $r->client;
+        $create->metodologia = $r->metodologia;
+        $create->dias_pago = $r->dia_pago;
+
         $create->capital_solicitado = $r->capital_solicitado;
         $create->capital_pagado = 0;
         $create->capital_restante = $r->capital_solicitado;
+
+        $create->interes = $r->interes;
+        $create->interes_restante = $r->numero_cuotas *$r->capital_solicitado *($r->interes/100) ;
         $create->interes_pagado = 0;
-        $create->interes_total = $r->total_pagar_interes;
-        $create->interes_restante = 0;
-        $create->interes_mora = $r->interes_mora;
-        $create->total_cuotas = $r->cuota_pagar;
-        $create->dias_pagos = $r->dias_pagos;
-        $create->interes_mora_pagado = 0;
-        $create->interes_mora_monto = $r->monto_mora;
-        $create->dias_mora = $r->dias_mora; 
-        $create->numero_cuotas = $r->numero_cuotas;
-        $create->dias_restantes = $r->numero_cuotas;
+        $create->interes_total =  $r->numero_cuotas *$r->capital_solicitado *($r->interes/100) ;
+
+        $create->mora_pagado = 0;
+        $create->mora_monto =$r->monto_mora;
+        $create->dias_mora =$r->rango_dia_mora;
+        $create->dias_mora_pagados = 0;
+        
+        $create->cuotas_numero = $r->numero_cuotas;
+        $create->cuotas_pagada = 0;
+        $create->cuotas_restante =  $r->numero_cuotas;
+        $create->cuotas_monto = ($r->capital_solicitado + ($r->capital_solicitado *($r->interes/100)))/$r->numero_cuotas;
+        $create->cuotas_interes =  ($r->capital_solicitado *($r->interes/100)) / $r->numero_cuotas;
+        $create->cuotas_capital =  $r->capital_solicitado / $r->numero_cuotas;
         $create->estado = 1; 
+        $create->periodo = $r->periodo; 
         $create->save();
         if( $create->id_prestamo > 0){
             if($r->numero_cuotas > 1)
             {
+                
                 for($i = 0 ; $i <= $r->numero_cuotas ; $i++ )
                 {
+                    switch($r->periodo)
+                    {
+                        case 3:
+                        $fecha =DB::raw('DATE_ADD( curdate(), INTERVAL  '.($i*15).' DAY )');
+                        break;
+                        case 4:
+                        $fecha =DB::raw('DATE_ADD( curdate(), INTERVAL  '.($i+1).' MONTH)'); 
+                        break;
+                        case 5:
+                        $fecha =DB::raw('DATE_ADD( curdate(), INTERVAL  '.($i+6).' MONTH )'); 
+                        break;
+                        case 6:
+                        $fecha =DB::raw('DATE_ADD( curdate(), INTERVAL  '.($i+3).' MONTH )'); 
+                        break;
+                        case 7:
+                        $fecha =DB::raw('DATE_ADD( curdate(), INTERVAL  '.($i+4).' MONTH )'); 
+                        break;
+                        case 8:
+                        $fecha =DB::raw('DATE_ADD( curdate(), INTERVAL   '.($i+1).' YEAR )'); 
+                        break;
+                    }
                     DB::table('agenda')->insert([
                         'id_producto' => $create->id_prestamo,
-                        'id_cliente' => $r->id_cliente,
-                        'fecha' => DB::raw('DATE_ADD( curdate(), INTERVAL '.($i+1).' MONTH )'),
+                        'id_cliente' => $r->client,
+                        'fecha' => $fecha,
                         'estado' => 1,
-                        'comentario' =>'Cuota a pagar: '.$r->cuota_pagar 
+                        'comentario' =>'Cuota a pagar: '.($r->capital_solicitado + ($r->capital_solicitado *($r->interes/100)))/$r->numero_cuotas 
                     ]);
                 }
             }
@@ -84,9 +105,9 @@ class PrestamosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function all(Request $request)
     {
-        //
+        return Prestamos::with(['rsPeriodo','rsCliente'])->where('estado',1)->paginate(10);
     }
 
     /**

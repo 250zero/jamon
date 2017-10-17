@@ -15,7 +15,7 @@
                          <li role="presentation"><a href="#penalidad" aria-controls="penalidad" role="tab" data-toggle="tab">Penalidad</a></li>
                         <li role="presentation"><a href="#impresion" aria-controls="impresion" role="tab" data-toggle="tab">Proyeccion</a></li>
                     </ul>
-
+                    {{ csrf_field() }} 
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="capital">

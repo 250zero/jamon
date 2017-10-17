@@ -34,6 +34,7 @@ Route::get('/agenda', 'AgendaController@index');
 Route::post('/prestamos','PrestamosController@create');
 Route::get('/prestamos/vista/previa','PrestamosController@preview');
 Route::get('/prestamos','PrestamosController@index');
+Route::get('/prestamos/all','PrestamosController@all');
 Route::get('/prestamos/clientes','PrestamosController@client');
 Route::get('/prestamos/detail','PrestamosController@show'); 
 Route::get('/prestamos/transacction/all','PrestamosController@transacctionShow');

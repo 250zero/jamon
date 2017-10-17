@@ -23,7 +23,7 @@
                                     <hr />        
                                 <div class="row">
                                     <div class="col-sm-12">
-                                <table id="tabla_clientes" class="table table-striped table-bordered table-hover" > 
+                                <table id="tabla_prestamos" class="table table-striped table-bordered table-hover" > 
                                     <thead>
                                         <tr> 
                                                 <th>Prestamo No.</th>

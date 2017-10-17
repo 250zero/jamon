@@ -10,14 +10,38 @@
 
 
  var pagina_prest= 1 ;
- var ultima_pagina_prest = 0;
-
+ var ultima_pagina_prest = 0; 
+ function buscarLoans()
+ {
+    $.ajax({
+        url: BASE_URL + 'prestamos/all' ,
+        method: 'get' ,
+        dataType:'json',
+        data:{
+            search : $().val(),
+            page : pagina_prest
+        },            
+    }).done(function(result){
+        var html = '';
+         $(result.data).each(function(){
+                html += '<tr>';
+                html += '<td>'+this.id_prestamo+'</td>';
+                html += '<td>'+format2(this.capital_solicitado,'$')+'</td>';
+                html += '<td>'+this.interes+'%</td>';
+                html += '<td>'+this.rs_periodo.names+'</td>';
+                html += '<td>'+this.cuotas_restante+'</td>';
+                html += '<td>'+this.rs_cliente.nombre + ' ' +this.rs_cliente.apellido+'</td>';
+                html += '</tr>';
+         });
+         $('#tabla_prestamos tbody').html(html);
+    }); 
+ }
 
  $(document).ready(function(){ 
-    setearValores();
+    setearValores(); 
+    buscarLoans();
  });
- 
- $('#LoansModalDetail').modal('show');
+  
 
  $('#btn_nuevo').on('click',function(){
     actualizarValores();
@@ -58,7 +82,7 @@
  
 
  
-$('#generar_proyeccion').on('click',function(){
+ $('#generar_proyeccion').on('click',function(){
     actualizarValores();
     data={
           capital_solicitado : capital_solicitado,
@@ -79,6 +103,40 @@ $('#generar_proyeccion').on('click',function(){
         }).done(function(result){
                  $('#prestamos_vista_previa').html(result);
         }); 
+
+});
+
+$('#save_loans').on('click',function(){
+   actualizarValores();
+   data={
+         capital_solicitado : capital_solicitado,
+         interes :interes,
+         numero_cuotas :numero_cuotas,
+         dia_pago :dia_pago, 
+         monto_mora:monto_mora,
+         rango_dia_mora :rango_dia_mora,
+         metodologia :metodologia,
+         periodo :periodo,
+         client :client ,
+         _token:$('input[name=_token]').val()
+   };  
+       $.ajax({
+           url: BASE_URL + 'prestamos' ,
+           method: 'post' ,
+           dataType:'json',
+           data:data,            
+       }).done(function(result){
+            if(result.status > 0)
+            {
+                    pagina_prest = 1;
+                    buscarLoans();    
+                    $('#LoansModalDetail').modal('hide');
+                    toastr.success(result.msn, 'Operación exitosa'); 
+                    return true;
+            }
+                toastr.warning(result.msn, 'Advertencia'); 
+                return false;
+       }); 
 
 });
 

@@ -1,5 +1,3 @@
-
- $('#LoansModalDetail').modal('show');
  cargarPeriodos();
  cargarMetodos();
  cargarClientes();
@@ -47,7 +45,7 @@ function cargarClientes(){
         dataType:'json',
         data:{tipo:2},            
     }).done(function(result){
-            var html='<option value="0">Anonimo</option>';
+            var html='';
             $(result).each(function(){
                 html += '<option value="'+this.id_cliente+'">';
                 html +=  this.nombre+' '+this.apellido;
