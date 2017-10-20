@@ -24,7 +24,7 @@
     }).done(function(result){
         var html = '';
          $(result.data).each(function(){
-                html += '<tr>';
+                html += '<tr onclick="LoansDetail(\''+this.id_prestamo+'\')" >';
                 html += '<td>'+this.id_prestamo+'</td>';
                 html += '<td>'+format2(this.capital_solicitado,'$')+'</td>';
                 html += '<td>'+this.interes+'%</td>';
@@ -79,6 +79,56 @@
  
  
 
+ 
+ function LoansDetail(id )
+ {     
+      $.ajax({
+            url: BASE_URL + 'prestamos/detail' ,
+            method: 'get' ,
+            dataType:'json',
+            data:{id:id},            
+        }).done(function(result){
+                 $('.modal30-title').html('Detalle de Prestamo ');
+                 $('#cliente_detalle_prestamo').html(result.rs_cliente.nombre + ' '+result.rs_cliente.apellido );
+                 $('#metodo_prestamo').html(result.rs_periodo.names);
+                 
+                 $('#capital_solicitado_detail').html(format2(result.capital_solicitado,'$'));
+                 $('#capital_pagado_detail').html(format2(result.capital_pagado,'$'));
+                 $('#capital_restante_detail').html(format2(result.capital_restante,'$'));
+                 $('#porciento_detail').html(result.interes+' %');
+                 $('#interes_total_detail').html(format2(result.interes_total,'$'));
+                 $('#montal_interes_pagado').html(format2(result.interes_pagado,'$'));
+                 $('#montal_interes_restante').html(format2(result.interes_restante,'$'));                 
+                 $('#numero_cuotas').html( result.cuotas_numero );
+                 $('#monto_cuotas').html(format2(result.cuotas_monto,'$'));
+                 $('#numero_cuotas_pagadas').html( result.cuotas_pagada );
+                 $('#numero_cuotas_restante').html( result.cuotas_restante );                 
+                 $('#monto_cuotas_capital').html(format2( result.cuotas_capital,'$') );
+                 $('#monto_cuotas_interes').html(format2(result.cuotas_interes,'$')); 
+
+                 
+                 $('#rango_dia_mora').html( result.dias_mora );
+                 $('#numero_cuotas_restante').html( result.cuotas_restante ); 
+                 $('#monto_pagar_mora').html( format2(result.mora_monto,'$') ); 
+                 
+                 $('#mora_pagada').html( result.mora_pagado );
+                 $('#dias_mora_pagada').html( result.dias_mora_pagados ); 
+                 $('#dia_pago').html( result.dias_pago ); 
+                 
+                //  $('#interes_mora_detail').html(result.interes);
+                //  $('#interes_mora_monto_detail').html(result.capital_solicitado);
+                //  $('#interes_mora_pagado_detail').html(result.interes);
+                //  $('#total_cuotas_detail').html(result.capital_solicitado);
+                //  $('#dias_pagos_detail').html(result.interes);
+                //  $('#numero_cuotas_detail').html(result.capital_solicitado);
+                //  $('#dias_restantes_detail').html(result.interes);
+                //  $('#estado_prestamo').html(result.capital_solicitado);
+
+                 
+                 $('#LoansModalDetailTransac').modal('show');
+
+        }); 
+ }
  
 
  
