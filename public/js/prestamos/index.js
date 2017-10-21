@@ -91,8 +91,10 @@
                  $('.modal30-title').html('Detalle de Prestamo ');
                  $('#cliente_detalle_prestamo').html(result.rs_cliente.nombre + ' '+result.rs_cliente.apellido );
                  $('#metodo_prestamo').html(result.rs_periodo.names);
-                 
-                 $('#capital_solicitado_detail').html(format2(result.capital_solicitado,'$'));
+
+                 $('#tipo_calculo_interes').html(result.rs_tipo_prestamo.names);
+
+                 $('#capital_solicitado_detail').html(format2(result.capital_solicitado,'$')); 
                  $('#capital_pagado_detail').html(format2(result.capital_pagado,'$'));
                  $('#capital_restante_detail').html(format2(result.capital_restante,'$'));
                  $('#porciento_detail').html(result.interes+' %');
@@ -105,26 +107,15 @@
                  $('#numero_cuotas_restante').html( result.cuotas_restante );                 
                  $('#monto_cuotas_capital').html(format2( result.cuotas_capital,'$') );
                  $('#monto_cuotas_interes').html(format2(result.cuotas_interes,'$')); 
-
-                 
-                 $('#rango_dia_mora').html( result.dias_mora );
+ 
+                 $('#rango_de_dia_mora').html( (result.dias_mora*1)+'  ' );
                  $('#numero_cuotas_restante').html( result.cuotas_restante ); 
                  $('#monto_pagar_mora').html( format2(result.mora_monto,'$') ); 
                  
                  $('#mora_pagada').html( result.mora_pagado );
                  $('#dias_mora_pagada').html( result.dias_mora_pagados ); 
-                 $('#dia_pago').html( result.dias_pago ); 
-                 
-                //  $('#interes_mora_detail').html(result.interes);
-                //  $('#interes_mora_monto_detail').html(result.capital_solicitado);
-                //  $('#interes_mora_pagado_detail').html(result.interes);
-                //  $('#total_cuotas_detail').html(result.capital_solicitado);
-                //  $('#dias_pagos_detail').html(result.interes);
-                //  $('#numero_cuotas_detail').html(result.capital_solicitado);
-                //  $('#dias_restantes_detail').html(result.interes);
-                //  $('#estado_prestamo').html(result.capital_solicitado);
-
-                 
+                 $('#dia_de_pago').html( result.dias_pago  ); 
+                  
                  $('#LoansModalDetailTransac').modal('show');
 
         }); 

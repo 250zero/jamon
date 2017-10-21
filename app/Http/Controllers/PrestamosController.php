@@ -118,7 +118,7 @@ class PrestamosController extends Controller
      */
     public function show(Request $request)
     {
-        return Prestamos::with(['rsPeriodo','rsCliente'])->where('id_prestamo',$request->id)->first();
+        return Prestamos::with(['rsPeriodo','rsCliente','rsTipoPrestamo'])->where('id_prestamo',$request->id)->first();
     }
 
     /**

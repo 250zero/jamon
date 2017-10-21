@@ -18,10 +18,22 @@
                                                <td><b>Cliente </b></td>
                                                <td id="cliente_detalle_prestamo"></td>
                                             </tr> 
-                                           <tr>
-                                               <td><b>Metodo de Prestamo</b></td>
-                                               <td id="metodo_prestamo"></td>
-                                            </tr> 
+                                            <tr>
+                                                <td><b>Periodo de Pago</b></td>
+                                                <td id="metodo_prestamo"></td>
+                                             </tr>  
+                                             <tr>
+                                                 <td><b>Metodo de Prestamo</b></td>
+                                                 <td id="tipo_calculo_interes"></td>
+                                              </tr>  
+                                            <tr>
+                                               <td><b>Dias de Pago</b></td>
+                                               <td id="dia_de_pago"></td>
+                                            </tr>  
+                                            <tr>
+                                                <td><b>Capital Solicitado</b></td>
+                                                <td id="capital_solicitado_detail"></td>
+                                             </tr> 
                                             <tr>
                                                 <td><b>Capital Pagado</b></td>
                                                 <td id="capital_pagado_detail"></td>
@@ -74,7 +86,7 @@
 
                                             <tr>
                                             <td><b>Rango de dia mora</b></td>
-                                            <td id="rango_dia_mora"></td>
+                                            <td id="rango_de_dia_mora"></td>
                                          </tr> 
                                          <tr>
                                             <td><b>Monto a pagar por mora</b></td>
@@ -88,10 +100,7 @@
                                                <td><b>Dias de mora pagados</b></td>
                                                <td id="dias_mora_pagada"></td>
                                             </tr> 
-                                            <tr>
-                                               <td><b>Dias de Pago</b></td>
-                                               <td id="dia_pago"></td>
-                                            </tr>  
+                                           
                                             <tr>
                                                <td> </td>
                                                <td  ></td>

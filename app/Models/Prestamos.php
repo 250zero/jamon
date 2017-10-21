@@ -13,8 +13,12 @@ class Prestamos extends Model
     {
         return $this->belongsTo('App\Models\Configuration', 'periodo', 'id');
     }
+    public function rsTipoPrestamo()
+    {
+        return $this->belongsTo('App\Models\Configuration', 'metodologia', 'id');
+    }
     public function rsCliente()
     {
         return $this->belongsTo('App\Models\Cliente', 'id_cliente', 'id_cliente');
-    }
+    } 
 }
