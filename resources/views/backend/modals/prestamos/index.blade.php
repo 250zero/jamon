@@ -100,7 +100,7 @@
                                             </tr>  
                                                 <tr>
                                                     <td><button id="transaccion_detail" class="btn btn-warning" >Realizar Transacción</button> </td>
-                                                    <td><button id="transaccion_detail" class="btn btn-success" >Tabla Amortización</button>  </td>
+                                                    <td><a href="#" id="tabla_amortizacion" class="btn btn-success" >Tabla Amortización</a>  </td>
                                                     </tr>  
                                            </tbody>
                                         </table>

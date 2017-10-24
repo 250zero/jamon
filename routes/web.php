@@ -43,6 +43,7 @@ Route::post('/prestamos/transacction','PrestamosController@transacction');
 
 
 Route::get('/reportes', 'ReportesController@index');
+Route::get('/reportes/amortizacion', 'ReportesController@amortizacion');
 Route::get('/reportes', 'ReportesController@index');
 
 
