@@ -44,9 +44,7 @@ class PrestamosController extends Controller
         $create->interes_total =  $r->numero_cuotas *$r->capital_solicitado *($r->interes/100) ;
 
         $create->mora_pagado = 0;
-        $create->mora_monto =$r->monto_mora;
-        $create->dias_mora =$r->rango_dia_mora;
-        $create->dias_mora_pagados = 0;
+        $create->mora_monto =$r->monto_mora; 
         
         $create->cuotas_numero = $r->numero_cuotas;
         $create->cuotas_pagada = 0;

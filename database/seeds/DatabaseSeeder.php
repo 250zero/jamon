@@ -44,5 +44,29 @@ class DatabaseSeeder extends Seeder
             ['names' => 'Cuatrimestral','type' => '2'],
             ['names' => 'Anual','type' => '2'] 
         ]);
+        $prestamos =  [  
+                'id_cliente' => 2,
+                'metodologia' => 1,
+                'periodo' => 3,
+                'dias_pago' => 1,
+                'capital_solicitado' => 50000.00,
+                'capital_pagado' => 0.00,
+                'capital_restante' => 50000.00,
+                'interes' => 10,
+                'interes_pagado' => 0.00,
+                'interes_restante' => 150000.00,
+                'interes_total' => 150000.00,
+                'mora_pagado' => 0.00,
+                'mora_monto' => 0.00,
+                'cuotas_numero' => 30,
+                'cuotas_pagada' => 0.00,
+                'cuotas_restante' => 30.00,
+                'cuotas_monto' => 1833.33,
+                'cuotas_interes' => 166.67,
+                'cuotas_capital' => 1666.67,
+                'estado' => 1, 
+            ];
+            DB::table('prestamos')->insert( $prestamos );
+        
     }
 }

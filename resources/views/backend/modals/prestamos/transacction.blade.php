@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-300" role="dialog" id="transactionModal">
+<div class="modal fade" tabindex="-400" role="dialog" id="transactionModal">
   <div class="modal-dialog" role="document"  style="width:55%" >
     <div class="modal-content">
       <div class="modal-header">
@@ -13,19 +13,18 @@
                                         <label>Tipo de Transacción</label>
                                         <select id="tipo_transaccion" class="form-control">
                                             <option value="1">Pago de Cuota</option>
-                                            <option value="2">Pago de Mora</option> 
+                                            <option value="2">Pago de Capital</option> 
+                                            <option value="3">Pago de Mora</option> 
                                         </select>
                                     </div>
-                                    <div class="form-group pago_cuota"  >
-                                            <label>Total de cuotas a pagar <span id="cuota_label"></span></label>
-                                            <input type="number" class="form-control"  id="cuotas_a_pagar">
-                                    </div>
-                                    <div class="form-group pago_mora" style="display:none">
-                                            <label>Dias de mora a Pagar</label>
-                                            <input type="number" class="form-control" id="dia_mora_pagar">
+                                    <div class="form-group pago_mora"  >
+                                            <label id="label_pago_transaccion">Numero de Cuotas a Pagar</label>
+                                            <input type="number" class="form-control" id="monto_transaccion">
                                     </div> 
                                 </div>
-                                <div class="col-sm-7"> 
+                                <div class="col-sm-7">
+                                <label id="label_pago_transaccion">Notas</label>
+                                            
                                    <textarea class="form-control" id="comentario_transaccion" cols="30" rows="10">
 
                                    </textarea>

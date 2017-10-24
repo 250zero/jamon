@@ -84,10 +84,7 @@
                                             </tr> 
 
 
-                                            <tr>
-                                            <td><b>Rango de dia mora</b></td>
-                                            <td id="rango_de_dia_mora"></td>
-                                         </tr> 
+                                             
                                          <tr>
                                             <td><b>Monto a pagar por mora</b></td>
                                             <td id="monto_pagar_mora"></td>
@@ -95,11 +92,7 @@
                                             <tr>
                                                <td><b>Mora Pagada</b></td>
                                                <td id="mora_pagada"></td>
-                                            </tr> 
-                                            <tr>
-                                               <td><b>Dias de mora pagados</b></td>
-                                               <td id="dias_mora_pagada"></td>
-                                            </tr> 
+                                            </tr>  
                                            
                                             <tr>
                                                <td> </td>

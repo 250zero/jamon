@@ -30,9 +30,7 @@ class CreatePrestamosTable extends Migration
             $table->float('interes_total'); 
 
             $table->float('mora_pagado');
-            $table->float('mora_monto');
-            $table->integer('dias_mora');
-            $table->integer('dias_mora_pagados'); 
+            $table->float('mora_monto');  
 
             $table->integer('cuotas_numero');
             $table->float('cuotas_pagada');

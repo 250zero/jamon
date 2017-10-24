@@ -107,13 +107,11 @@
                  $('#numero_cuotas_restante').html( result.cuotas_restante );                 
                  $('#monto_cuotas_capital').html(format2( result.cuotas_capital,'$') );
                  $('#monto_cuotas_interes').html(format2(result.cuotas_interes,'$')); 
- 
-                 $('#rango_de_dia_mora').html( (result.dias_mora*1)+'  ' );
+  
                  $('#numero_cuotas_restante').html( result.cuotas_restante ); 
                  $('#monto_pagar_mora').html( format2(result.mora_monto,'$') ); 
                  
-                 $('#mora_pagada').html( result.mora_pagado );
-                 $('#dias_mora_pagada').html( result.dias_mora_pagados ); 
+                 $('#mora_pagada').html( result.mora_pagado );  
                  $('#dia_de_pago').html( result.dias_pago  ); 
                   
                  $('#LoansModalDetailTransac').modal('show');
@@ -287,75 +285,6 @@ function verPrestamosDetails(id){
     });
 } 
 
-$('#transaccion_detail').on('click',function(){
-    $('#transactionModal').modal('show');
-    $('#cuota_label').html('('+dias_restantes+'/'+numero_cuotas+')');
-    $('#tipo_transaccion').val(1);
-    $('#cuotas_a_pagar').val(0);
-    $('#comentario_transaccion').val('');
-    $('#dia_mora_pagar').val(0);
-   
-});
-
-
-$('#tipo_transaccion').on('change',function(){
-    if($('#tipo_transaccion').val() == 1)
-    {
-        $('#cuota_label').html('('+dias_restantes+'/'+numero_cuotas+')');
-        $('.pago_cuota').css('display','block');
-        $('.pago_mora').css('display','none');
-
-    }
-    if($('#tipo_transaccion').val() == 2)
-    {
-        $('.pago_cuota').css('display','none');
-        $('.pago_mora').css('display','block');
-    }
-});
-
-
-$('#save_transacction').on('click',function(){
-    if($('#tipo_transaccion').val() == 1 && $('#cuotas_a_pagar').val() > dias_restantes ){
-        toastr.warning('El numero de cuotas a pagar excede el numero de cuotas restante', 'Advertencia'); 
-        return false;
-    }
-
-    if(  $('#cuotas_a_pagar').val()  < 0 ){
-        toastr.warning('El numero de cuotas a pagar no puede ser menor que cero', 'Advertencia'); 
-        return false;
-    }
-    if(  $('#dia_mora_pagar').val()  < 0 ){
-        toastr.warning('Los dias no puede ser menor que cero', 'Advertencia'); 
-        return false;
-    }
-     var data={
-         tipo_transacction:$('#tipo_transaccion').val(),
-         cuotas_a_pagar:$('#cuotas_a_pagar').val(),
-         comentario_transaccion:$('#comentario_transaccion').val(),
-         dia_mora_pagar:$('#dia_mora_pagar').val(),
-         id_prestamo:$('#id_prestamo').val(),
-         _token:$('input[name=_token]').val() 
-     }
-        $.ajax({
-            url: BASE_URL + 'prestamos/transacction' ,
-            method: 'POST' ,
-            dataType:'json',
-            data:data
-        }).done(function(result){
-                if(result.status > 0)
-                { 
-                    $('#transactionModal').modal('hide');
-                    toastr.success(result.msn, 'Operación exitosa'); 
-                    verTransacction();
-                    verPrestamos( )
-                    verPrestamosDetails($('#id_prestamo').val());
-                    return true;
-                }
-                toastr.warning(result.msn, 'Advertencia'); 
-                return false; 
-        });  
-});
-  
 
 function verTransacction(){
     $.ajax({

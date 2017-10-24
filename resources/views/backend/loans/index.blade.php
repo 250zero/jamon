@@ -64,5 +64,7 @@
         @include('backend.template.footer') 
         @include('backend.modals.prestamos.add') 
         @include('backend.modals.prestamos.index') 
+        @include('backend.modals.prestamos.transacction') 
         <script src="{{asset('js/prestamos/index.js')}}"></script>
         <script src="{{asset('js/prestamos/list.js')}}"></script>
+        <script src="{{asset('js/prestamos/transaccion.js')}}"></script>
