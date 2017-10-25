@@ -200,24 +200,24 @@ function verPrestamos( )
     }).done(function(result){
         var html=''; 
         $(result.data).each(function(){  
-           html += '<tr onclick="verPrestamosDetails('+this.id_prestamo+')" >'; 
+           html += '<tr onclick="LoansDetail('+this.id_prestamo+')" >'; 
            html += '<td>';
-           html +=  this.numero_cuotas;
+           html +=  this.cuotas_numero;
            html += '</td>';
            html += '<td>';
-           html +=  this.dias_pagos;
+           html +=  this.dias_pago;
            html += '</td>';
            html += '<td>';
-           html +=  this.porciento;
+           html +=  this.interes;
            html += '</td>';
            html += '<td>';
-           html +=  format2(this.total_cuotas,'$');
+           html +=  format2(this.cuotas_monto,'$');
            html += '</td>';
            html += '<td>';
            html +=  format2(this.capital_solicitado,'$');
            html += '</td>';
            html += '<td>';
-           html +=  format2((this.capital_solicitado + this.interes_total),'$');
+           html +=  format2((this.capital_restante + this.interes_restante),'$');
            html += '</td>'; 
            html += '<tr>'; 
        });
@@ -242,53 +242,7 @@ $('#loans_prev').on('click',function(){
     }
 });
 
-
-function verPrestamosDetails(id){
-    $.ajax({
-        url: BASE_URL + 'prestamos/detail' ,
-        method: 'get' ,
-        dataType:'json',
-        data:{id:id}
-    }).done(function(result){
-       
-        $('#capital_solicitado_detail').html(format2(result.capital_solicitado,'$')); 
-        $('.modal5-title').html('Detalle de prestamo'); 
-        $('#capital_pagado_detail').html(format2(result.capital_pagado,'$'));
-        $('#capital_restante_detail').html(format2(result.capital_restante,'$'));
-        $('#interes_total_detail').html(format2(result.interes_total,'$'));
-        $('#porciento_detail').html(result.porciento+'%');
-        $('#interes_mora_detail').html( result.interes_mora );
-        $('#interes_mora_monto_detail').html(format2(result.interes_mora_monto,'$'));
-        $('#interes_mora_pagado_detail').html(format2(result.interes_mora_pagado,'$'));
-        $('#total_cuotas_detail').html(format2(result.total_cuotas,'$'));
-        $('#dias_pagos_detail').html(result.dias_pagos);
-        $('#numero_cuotas_detail').html(result.numero_cuotas);
-        if(result.estado == 1)
-        {    
-            $('#estado_prestamo').html('Activo');
-            $('#estado_prestamo').css('color','#35ad0f');
-        }
-        if(result.estado == 0)
-        {    
-            $('#estado_prestamo').html('Anulado');
-            $('#estado_prestamo').css('color','#d82525');  
-            $('#estado_prestamo').css('font-weight','bold');
-        }
-        if(result.estado == 3)
-        {    
-            $('#estado_prestamo').html('Pagado');
-            $('#estado_prestamo').css('color','#2552d8');     
-            $('#estado_prestamo').css('font-weight','bold');   
-        }
-        numero_cuotas = result.numero_cuotas;
-        dias_restantes = result.dias_restantes;
-        $('#dias_restantes_detail').html(result.dias_restantes);   
-        $('#id_prestamo').val(result.id_prestamo);  
-        $('#LoansModalDetailTransac').modal('show');
-        verTransacction();
-    });
-} 
-
+ 
 
 function verTransacction(){
     $.ajax({

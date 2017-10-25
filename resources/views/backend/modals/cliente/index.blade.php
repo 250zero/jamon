@@ -49,7 +49,7 @@
                             <th>Porciento</th>
                             <th>Cuotas</th>
                             <th>Capital Solicitado</th> 
-                            <th>Total a Pagar</th> 
+                            <th>Total Restante</th> 
                         </tr>
                     </thead>
                     <tbody></tbody>

@@ -7,7 +7,7 @@ var ultima_pagina_prest = 1;
 
 
 $(document).ready(function(){
-    buscar(); 
+    buscar();  
 });
 
 
