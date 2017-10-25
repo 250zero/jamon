@@ -143,47 +143,46 @@ class PrestamosController extends Controller
     }
     public function transacction(Request $r)
     {
-        if(!$r->has('id_prestamo')){
-            return ['Esta transaccion no puede ser ejcutada','status'=>0];
+        if(empty($r->id_prestamo)){
+            return ['msn'=>'Favor verificar la transaccion existente','status'=>0];
         }
-        $prestamo = Prestamos::find($r->id_prestamo);
-        $tr= new Transaccion();  
- 
-        if($r->tipo_transacction == 1){
-           if( $prestamo->dias_restantes - $r->cuotas_a_pagar ==  0)
-           {
-                $prestamo->estado = 3;
-           }
-            $prestamo->dias_restantes = $prestamo->dias_restantes - $r->cuotas_a_pagar ;
-            $prestamo->dias_pagos = $prestamo->dias_pagos + $r->cuotas_a_pagar ; 
+        if(empty($r->tipo_transacction)){
+            return ['msn'=>'Favor seleccionar un tipo de transaccion valido','status'=>0];
+        }
+        if(empty($r->monto_transaccion)){
+            return ['msn'=>'Favor ingresar un monto valido, de transaccion','status'=>0];
+        }
 
-            $prestamo->interes_pagado = (( $prestamo->interes_total / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar) + $prestamo->interes_pagado  ;
-            $prestamo->interes_restante =  $prestamo->interes_total - $prestamo->interes_pagado;
-            
-            $prestamo->capital_restante = $prestamo->capital_solicitado - $prestamo->capital_pagado ;
-            $prestamo->capital_pagado = (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar) + $prestamo->capital_pagado  ;
+        $prest= Prestamos::find($r->id_prestamo); 
+        switch($r->tipo_transacction){
+            case 1://cuotas
+
+            $prest->capital_pagado +=   ($r->monto_transaccion*$prest->cuotas_capital);
+            $prest->capital_restante =  $prest->capital_restante -  ($r->monto_transaccion*$prest->cuotas_capital)  ; 
+            $prest->cuotas_pagada  +=  $r->monto_transaccion ;
+            $prest->cuotas_restante =   $prest->cuotas_restante -  $r->monto_transaccion; 
+            $prest->interes_pagado  +=  ($r->monto_transaccion*$prest->cuotas_interes) ;
+            $prest->interes_restante =$prest->interes_restante - ($r->monto_transaccion*$prest->cuotas_interes);
              
-            $tr->id_producto = $r->id_prestamo;
-            $tr->monto =  (( $prestamo->total_cuotas) *  $r->cuotas_a_pagar);
-            $tr->comentario = (empty($r->comentario_transaccion))?'':$r->comentario_transaccion;
-
-
-            $prestamo->save();
-            $tr->save();
-            return ['msn'=>'Transaccion realizada con exito','status'=>1]; 
+            break;
+            case 2://Capital
+            $prest->capital_pagado +=   $r->monto_transaccion;
+            $prest->capital_restante =   $r->monto_transaccion - $prest->capital_restante; 
+            break;
+            case 3://Mora 
+            $prest->mora_pagado +=   $r->monto_transaccion; 
+            break;
         }
-        if($r->tipo_transacction == 2){ 
- 
-            $prestamo->interes_mora_pagado = ($prestamo->interes_mora_monto * (  $r->dia_mora_pagar / $prestamo->dias_mora))  +  $prestamo->interes_mora_pagado  ;
-             $tr->id_producto = $r->id_prestamo;
-            $tr->monto =  (( $prestamo->capital_solicitado / $prestamo->numero_cuotas) *  $r->cuotas_a_pagar);
-            $tr->comentario = $r->comentario_transaccion; 
-            $prestamo->save();
-            $tr->save();
-            return ['msn'=>'Transaccion realizada con exito','status'=>1]; 
+        $prest->save();
+        $trans = new Transaccion();
+        $trans->monto = $r->monto_transaccion; 
+        $trans->id_producto = $r->id_prestamo; 
+        $trans->comentario = $r->comentario_transaccion; 
+        $trans->save();
+        if($trans->id_transacciones > 0)
+        {
+            return ['status'=>1,'msn'=>'Transaccion realizada con exito'];
         }
-
-        
     }
 
     public function transacctionShow(Request $r){

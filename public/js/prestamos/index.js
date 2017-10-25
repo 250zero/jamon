@@ -1,8 +1,11 @@
  var capital_solicitado = 0;
+ var capital_restante = 0;
  var interes = 0;
  var numero_cuotas = 0;
+ var monto_cuotas = 0;
  var dia_pago = '1'; 
  var monto_mora = 0;
+ var id_prestamo = 0;
  var rango_dia_mora = 0;
  var metodologia = 1;
  var periodo = 1;
@@ -81,7 +84,7 @@
 
  
  function LoansDetail(id )
- {     
+ {     id_prestamo = id;
       $.ajax({
             url: BASE_URL + 'prestamos/detail' ,
             method: 'get' ,
@@ -101,7 +104,10 @@
                  $('#interes_total_detail').html(format2(result.interes_total,'$'));
                  $('#montal_interes_pagado').html(format2(result.interes_pagado,'$'));
                  $('#montal_interes_restante').html(format2(result.interes_restante,'$'));                 
-                 $('#numero_cuotas').html( result.cuotas_numero );
+                 $('#numero_cuotas').html( result.cuotas_numero );              
+                 $('#id_prestamo').val( result.id_prestamo );
+                 monto_cuotas  = result.cuotas_monto;
+                 capital_restante = result.capital_restante;
                  $('#monto_cuotas').html(format2(result.cuotas_monto,'$'));
                  $('#numero_cuotas_pagadas').html( result.cuotas_pagada );
                  $('#numero_cuotas_restante').html( result.cuotas_restante );                 
@@ -119,7 +125,7 @@
                  $('#tabla_amortizacion').attr( 'target', 'blank' ); 
                   
                  $('#LoansModalDetailTransac').modal('show');
-
+                 verTransacction();
         }); 
  }
  
@@ -244,29 +250,3 @@ $('#loans_prev').on('click',function(){
 
  
 
-function verTransacction(){
-    $.ajax({
-        url: BASE_URL + 'prestamos/transacction/all' ,
-        method: 'get' ,
-        dataType:'json',
-        data:{id:$('#id_prestamo').val()}
-    }).done(function(result){
-        var html=''; 
-        $(result.data).each(function(){  
-           html += '<tr   >'; 
-           html += '<td>';
-           html +=  this.created_at;
-           html += '</td>';
-           html += '<td>';
-           html +=  this.comentario;
-           html += '</td>';
-           html += '<td>';
-           html +=  format2(this.monto,'$');
-           html += '</td>';   
-           html += '<tr>'; 
-       });
-       $('#header_transact tbody').html(html);
-       ultima_pagina_prest = result.last_page;
-       $('#info_pag_loans_trans').html('Mostrando pagina '+result.current_page+' de '+result.last_page+', de '+result.total+' registros');
-    });  
-}

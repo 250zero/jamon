@@ -2,27 +2,53 @@
 $('#transaccion_detail').on('click',function(){
     $('#transactionModal').modal('show'); 
     $('#tipo_transaccion').val(1);
-    $('#cuotas_a_pagar').val(0);
-    $('#comentario_transaccion').val('');
+    $('#monto_transaccion').val(1);
+    $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un pago de '+$('#monto_transaccion').val()+" Cuota(s), equivalente a un monto "+format2($('#monto_transaccion').val()*monto_cuotas,'$')); 
+    $('.lbmensaje_prestamos').html('Cuotas Restantes '+(($('#numero_cuotas').html()*1)-$('#monto_transaccion').val()));
     $('#dia_mora_pagar').val(0);
    
 });
-
-
-
+$('#monto_transaccion').on('change',function(){  
+    switch($('#tipo_transaccion').val()  ){
+        case '1':
+        $('#label_pago_transaccion').html('Numero de Cuotas a Pagar'); 
+        $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un pago de '+$('#monto_transaccion').val()+" Cuota(s), equivalente a un monto "+format2($('#monto_transaccion').val()*monto_cuotas,'$')); 
+        $('.lbmensaje_prestamos').html('Cuotas Restantes '+(($('#numero_cuotas').html()*1)-$('#monto_transaccion').val()));
+        break;
+        case '2':
+        $('#label_pago_transaccion').html('Monto de Capital a Pagar');   
+        $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un abono al capital por un monto de '+format2( ($('#monto_transaccion').val()*1)," $"));
+        $('.lbmensaje_prestamos').html('Capital restante '  +format2( (capital_restante - $('#monto_transaccion').val()),'$' ));
+        break;
+        case '3':
+        $('#label_pago_transaccion').html('Monto de Mora a Pagar');  
+        $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un pago por concepto de mora, donde se me cobrara un monto de '+format2(($('#monto_transaccion').val()*1)," $"));
+        $('.lbmensaje_prestamos').html('');
+        break;
+    } 
+    
+    
+});
+ 
 
 
 $('#tipo_transaccion').on('change',function(){
 
     switch($('#tipo_transaccion').val()  ){
         case '1':
-        $('#label_pago_transaccion').html('Numero de Cuotas a Pagar');  
+        $('#label_pago_transaccion').html('Numero de Cuotas a Pagar'); 
+        $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un pago de '+$('#monto_transaccion').val()+" Cuota(s), equivalente a un monto "+format2($('#monto_transaccion').val()*monto_cuotas,'$')); 
+        $('.lbmensaje_prestamos').html('Cuotas Restantes '+(($('#numero_cuotas').html()*1)-$('#monto_transaccion').val()));
         break;
         case '2':
         $('#label_pago_transaccion').html('Monto de Capital a Pagar');   
+        $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un abono al capital por un monto de '+format2( ($('#monto_transaccion').val()*1)," $"));
+        $('.lbmensaje_prestamos').html('Capital restante '  +format2( (capital_restante - $('#monto_transaccion').val()),'$' ));
         break;
         case '3':
         $('#label_pago_transaccion').html('Monto de Mora a Pagar');  
+        $('#comentario_transaccion').val('Yo '+$('#cliente_detalle_prestamo').html()+', realizare un pago por concepto de mora, donde se me cobrara un monto de '+$('#monto_transaccion').val()+" $");
+        $('.lbmensaje_prestamos').html('');
         break;
     } 
     
@@ -30,25 +56,12 @@ $('#tipo_transaccion').on('change',function(){
 
 
 $('#save_transacction').on('click',function(){
-    if($('#tipo_transaccion').val() == 1 && $('#cuotas_a_pagar').val() > dias_restantes ){
-        toastr.warning('El numero de cuotas a pagar excede el numero de cuotas restante', 'Advertencia'); 
-        return false;
-    }
-
-    if(  $('#cuotas_a_pagar').val()  < 0 ){
-        toastr.warning('El numero de cuotas a pagar no puede ser menor que cero', 'Advertencia'); 
-        return false;
-    }
-    if(  $('#dia_mora_pagar').val()  < 0 ){
-        toastr.warning('Los dias no puede ser menor que cero', 'Advertencia'); 
-        return false;
-    }
+     
      var data={
+         id_prestamo : $('#id_prestamo').val(),
          tipo_transacction:$('#tipo_transaccion').val(),
-         cuotas_a_pagar:$('#cuotas_a_pagar').val(),
-         comentario_transaccion:$('#comentario_transaccion').val(),
-         dia_mora_pagar:$('#dia_mora_pagar').val(),
-         id_prestamo:$('#id_prestamo').val(),
+         monto_transaccion:$('#monto_transaccion').val(),
+         comentario_transaccion:$('#comentario_transaccion').val() ,
          _token:$('input[name=_token]').val() 
      }
         $.ajax({
@@ -62,8 +75,8 @@ $('#save_transacction').on('click',function(){
                     $('#transactionModal').modal('hide');
                     toastr.success(result.msn, 'Operación exitosa'); 
                     verTransacction();
-                    verPrestamos( )
-                    verPrestamosDetails($('#id_prestamo').val());
+                    verPrestamos( );
+                    LoansDetail($('#id_prestamo').val());
                     return true;
                 }
                 toastr.warning(result.msn, 'Advertencia'); 
@@ -73,6 +86,8 @@ $('#save_transacction').on('click',function(){
   
 
 
+
+ 
 
 function verTransacction(){
     $.ajax({
@@ -84,6 +99,7 @@ function verTransacction(){
         var html=''; 
         $(result.data).each(function(){  
            html += '<tr   >'; 
+           html += '<td><a class="btn btn-primary" href="'+ BASE_URL +'reporte/recibo?id='+this.id_transacciones+'" target="blank"><li class="fa fa-print"></li></a></td>';
            html += '<td>';
            html +=  this.created_at;
            html += '</td>';
@@ -91,7 +107,11 @@ function verTransacction(){
            html +=  this.comentario;
            html += '</td>';
            html += '<td>';
+           if(parseInt(this.monto) < 100){ 
+            html +=   this.monto ;
+           }else{
            html +=  format2(this.monto,'$');
+           }
            html += '</td>';   
            html += '<tr>'; 
        });

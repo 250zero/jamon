@@ -10,6 +10,7 @@
                             <div class="col-sm-12"> 
                                 <div class="col-sm-5"> 
                                     <div class="form-group">
+                                            <input type="hidden"  id="id_prestamo" value="0">
                                         <label>Tipo de Transacción</label>
                                         <select id="tipo_transaccion" class="form-control">
                                             <option value="1">Pago de Cuota</option>
@@ -20,6 +21,7 @@
                                     <div class="form-group pago_mora"  >
                                             <label id="label_pago_transaccion">Numero de Cuotas a Pagar</label>
                                             <input type="number" class="form-control" id="monto_transaccion">
+                                            <label class="lbmensaje_prestamos"> </label>
                                     </div> 
                                 </div>
                                 <div class="col-sm-7">

@@ -8,7 +8,7 @@
       <div class="modal-body"> 
                     <div class="row">
                             <div class="col-sm-12"> 
-                                <div class="col-sm-5"> 
+                                <div class="col-sm-4"> 
                                     <div class="form-group">
                                         <h3>Detalle</h3>
                                         <input type='hidden' id="id_prestamo" value="0">
@@ -106,12 +106,13 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="col-sm-7"> 
+                                <div class="col-sm-8"> 
                                     <div class="form-group">
                                         <h3>Movimientos</h3>
                                         <table id="header_transact" class="table table-striped table-bordered table-hover" >
                                             <thead>
                                                     <tr>
+                                                    <th> </th> 
                                                     <th>Fecha</th> 
                                                     <th>Comentario</th> 
                                                     <th>Monto</th>  
