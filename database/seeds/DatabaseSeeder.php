@@ -67,6 +67,12 @@ class DatabaseSeeder extends Seeder
                 'estado' => 1, 
             ];
             DB::table('prestamos')->insert( $prestamos );
+            DB::table('company')->insert(  [
+                'name'=>'Agencia ATD',
+                'direccion'=>'Calle 5, casa 2 los Restaruradores',
+                'telefono' =>'809-714-3871',
+                'RNC' => '15351351'
+            ]);
         
     }
 }

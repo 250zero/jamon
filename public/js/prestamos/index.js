@@ -115,7 +115,7 @@
                  $('#dia_de_pago').html( result.dias_pago  ); 
 
 
-                 $('#tabla_amortizacion').attr( 'href', BASE_URL + 'reportes/amortizacion' ); 
+                 $('#tabla_amortizacion').attr( 'href', BASE_URL + 'reportes/amortizacion?id='+ id); 
                  $('#tabla_amortizacion').attr( 'target', 'blank' ); 
                   
                  $('#LoansModalDetailTransac').modal('show');
