@@ -35,4 +35,13 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('pdf.amortizacion', ['data'=>$data,'head'=>Company::find(1)]);
         return $pdf->stream();
     }
+    public function recibo(Request $r){
+        if(!$r->has('id'))
+        {
+            return ['msn'=>'Prestamo no identificado'];
+        }
+        $data =  Prestamos::with(['rsPeriodo','rsCliente','rsTipoPrestamo'])->where('id_prestamo',$r->id)->first();
+        $pdf = PDF::loadView('pdf.recibo', ['data'=>$data,'head'=>Company::find(1)]);
+        return $pdf->stream();
+    }
 }

@@ -99,7 +99,7 @@ function verTransacction(){
         var html=''; 
         $(result.data).each(function(){  
            html += '<tr   >'; 
-           html += '<td><a class="btn btn-primary" href="'+ BASE_URL +'reporte/recibo?id='+this.id_transacciones+'" target="blank"><li class="fa fa-print"></li></a></td>';
+           html += '<td><a class="btn btn-primary" href="'+ BASE_URL +'reportes/recibo?id='+this.id_transacciones+'" target="blank"><li class="fa fa-print"></li></a></td>';
            html += '<td>';
            html +=  this.created_at;
            html += '</td>';
